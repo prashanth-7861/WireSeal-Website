@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Remote Setup — Connect phones, tablets, and remote devices using WireGuard app.">
+    <title>WireSeal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding-top: 80px; min-height: 100vh; }
+        
+        .mobile-hero {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .mobile-hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+        
+        .mobile-hero p {
+            color: var(--text-dim);
+            font-size: 1.125rem;
+        }
+        
+        .mobile-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .mobile-section {
+            margin-bottom: 3.5rem;
+        }
+        
+        .mobile-section h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .mobile-section h2 svg { color: var(--accent); }
+        
+        /* App Cards */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .app-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .app-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+        
+        .app-info h3 {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.125rem;
+        }
+        
+        .app-info span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .app-card > p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .app-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .app-features li {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            padding: 0.375rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .app-features li:last-child { border-bottom: none; }
+        
+        .app-features .tag {
+            font-size: 0.6875rem;
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .tag-free {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        
+        .tag-paid {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-light);
+        }
+        
+        /* Method Cards */
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+        }
+        
+        .method-num {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .method-card h3 {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .method-card > p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .method-steps {
+            background: var(--bg-elevated);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        
+        .method-steps ol {
+            padding-left: 1.25rem;
+            margin: 0;
+        }
+        
+        .method-steps li {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            padding: 0.375rem 0;
+        }
+        
+        .method-steps li::marker {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* CTA */
+        .cta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cta-box p {
+            color: var(--text-dim);
+            margin-bottom: 1.25rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html" class="active">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="mobile-hero">
+            <h1>Mobile & Remote Devices</h1>
+            <p>Connect your phone, tablet, or any device to your home VPN.</p>
+        </div>
+        
+        <div class="mobile-content">
+            <!-- Apps Overview -->
+            <div class="mobile-section">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                        <path d="M12 18h.01"/>
+                    </svg>
+                    Apps You'll Need
+                </h2>
+                
+                <div class="app-grid">
+                    <!-- WireGuard -->
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">🛡️</div>
+                            <div class="app-info">
+                                <h3>WireGuard</h3>
+                                <span>VPN Client</span>
+                            </div>
+                        </div>
+                        <p>Official WireGuard app. Handles the encrypted VPN connection to your server.</p>
+                        <ul class="app-features">
+                            <li>Connect/Disconnect <span class="tag tag-free">Free</span></li>
+                            <li>QR code scan <span class="tag tag-free">Free</span></li>
+                            <li>Connection stats <span class="tag tag-free">Free</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Termius -->
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">💻</div>
+                            <div class="app-info">
+                                <h3>Termius</h3>
+                                <span>SSH Terminal</span>
+                            </div>
+                        </div>
+                        <p>SSH client for running commands on your server. Edit files, manage services.</p>
+                        <ul class="app-features">
+                            <li>SSH connections <span class="tag tag-free">Free</span></li>
+                            <li>SFTP transfer <span class="tag tag-free">Free</span></li>
+                            <li>Port forwarding <span class="tag tag-paid">Paid</span></li>
+                            <li>SSH tunneling <span class="tag tag-paid">Paid</span></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Documents -->
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">📁</div>
+                            <div class="app-info">
+                                <h3>Documents</h3>
+                                <span>by Readdle</span>
+                            </div>
+                        </div>
+                        <p>File manager for network drives, NAS, and cloud storage. Read, edit, organize files.</p>
+                        <ul class="app-features">
+                            <li>SMB/Network <span class="tag tag-free">Free</span></li>
+                            <li>SFTP access <span class="tag tag-paid">Paid</span></li>
+                            <li>Cloud storage <span class="tag tag-free">Free</span></li>
+                            <li>File editing <span class="tag tag-free">Free</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- WireGuard Setup -->
+            <div class="mobile-section">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Add to WireGuard
+                </h2>
+                
+                <div class="method-grid">
+                    <!-- QR Code -->
+                    <div class="method-card">
+                        <div class="method-num">1</div>
+                        <h3>Scan QR Code</h3>
+                        <p>Get config from your Server Mode dashboard.</p>
+                        <div class="method-steps">
+                            <ol>
+                                <li>Open WireGuard app</li>
+                                <li>Tap <strong>+</strong> button</li>
+                                <li>Select <strong>Scan QR code</strong></li>
+                                <li>Point camera at the QR</li>
+                                <li>Tap <strong>Create</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- Import File -->
+                    <div class="method-card">
+                        <div class="method-num">2</div>
+                        <h3>Import Config File</h3>
+                        <p>Use a .conf file saved from your server.</p>
+                        <div class="method-steps">
+                            <ol>
+                                <li>Get config file from server</li>
+                                <li>Open WireGuard app</li>
+                                <li>Tap <strong>+</strong> button</li>
+                                <li>Select <strong>Import</strong></li>
+                                <li>Choose .conf file</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Using Termius -->
+            <div class="mobile-section">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="4 17 10 11 4 5"/>
+                        <line x1="12" y1="19" x2="20" y2="19"/>
+                    </svg>
+                    Using Termius
+                </h2>
+                
+                <div class="app-grid">
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">💻</div>
+                            <div class="app-info">
+                                <h3>SSH</h3>
+                                <span>Command line</span>
+                            </div>
+                        </div>
+                        <p>Connect to your server via SSH. Run commands, restart services, check logs.</p>
+                        <ul class="app-features">
+                            <li>Key-based auth</li>
+                            <li>Command history</li>
+                            <li>Snippets</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">📂</div>
+                            <div class="app-info">
+                                <h3>SFTP</h3>
+                                <span>File transfer</span>
+                            </div>
+                        </div>
+                        <p>Upload and download files. Navigate remote directories.</p>
+                        <ul class="app-features">
+                            <li>Drag & drop</li>
+                            <li>Edit in place</li>
+                            <li>Resume transfers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Using Documents -->
+            <div class="mobile-section">
+                <h2>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2v11z"/>
+                    </svg>
+                    Using Documents
+                </h2>
+                
+                <div class="app-grid">
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">🖥️</div>
+                            <div class="app-info">
+                                <h3>SMB/Network</h3>
+                                <span>NAS drives</span>
+                            </div>
+                        </div>
+                        <p>Access your NAS, network drives, and shared folders on your network.</p>
+                        <ul class="app-features">
+                            <li>Windows shares</li>
+                            <li>SMB protocol</li>
+                            <li>Auto-connect</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-header">
+                            <div class="app-icon">🔐</div>
+                            <div class="app-info">
+                                <h3>SFTP</h3>
+                                <span>SecureFTP</span>
+                            </div>
+                        </div>
+                        <p>Access files on your server securely. Only in premium version.</p>
+                        <ul class="app-features">
+                            <li>SSH key auth</li>
+                            <li>Key management</li>
+                            <li>Sync folders</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="cta-box">
+                <h3>Need help?</h3>
+                <p>Check the full setup guide for more details.</p>
+                <div class="btn-group">
+                    <a href="setup.html" class="btn btn-primary">Full Setup</a>
+                    <a href="modes.html" class="btn btn-ghost">Modes</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="mobile.html">Mobile</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

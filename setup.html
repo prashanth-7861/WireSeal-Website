@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Installation">
+    <title>WireSeal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="setup.css">
+    <style>
+        .os-sidebar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .os-tab { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1rem; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.15s; flex: 1; min-width: 100px; }
+        .os-tab:hover { background: var(--accent-glow); color: var(--text); }
+        .os-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+        .os-tab svg { display: none; }
+        .method-content { max-width: 100%; margin: 0; padding: 0 1rem; box-sizing: border-box; overflow-x: hidden; }
+        .os-content { max-width: 100%; overflow-x: hidden; }
+        .method-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .code-block pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html" class="active">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <main class="setup-main">
+        <div class="setup-container">
+            <h1>Installation</h1>
+            <p class="setup-desc">Get WireSeal running on your system in minutes.</p>
+            
+            <!-- OS Sidebar -->
+            <div class="os-sidebar">
+                <button class="os-tab active" data-os="linux">
+                    <span>Linux</span>
+                </button>
+                <button class="os-tab" data-os="macos">
+                    <span>macOS</span>
+                </button>
+                <button class="os-tab" data-os="windows">
+                    <span>Windows</span>
+                </button>
+            </div>
+            
+            <!-- Linux -->
+            <div class="os-content active" id="linux">
+                <div class="req-section">
+                    <h3>System requirements</h3>
+                    <ul>
+                        <li>Ubuntu 20.04+, Debian 10+, Fedora 35+, RHEL 9+, Arch Linux</li>
+                        <li>Raspberry Pi OS (Debian-based)</li>
+                        <li>Root or sudo access</li>
+                    </ul>
+                </div>
+                
+                <div class="method-tabs">
+                    <button class="method-tab active" data-method="desktop">Desktop App</button>
+                    <button class="method-tab" data-method="cli">CLI</button>
+                    <button class="method-tab" data-method="script">Install Script</button>
+                </div>
+                
+                <!-- Linux Desktop App -->
+                <div class="method-content active" id="desktop">
+                    <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/WireSeal-linux-x86_64" target="_blank" class="download-btn primary">
+                            Download Desktop App (44 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Run</h4>
+                        <div class="code-block">
+                            <pre><code>chmod +x WireSeal-linux-x86_64
+./WireSeal-linux-x86_64</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h4>Dependencies (if needed)</h4>
+                        <div class="code-block">
+                            <pre><code># Ubuntu/Debian
+sudo apt install libgirepository1.0-dev libwebkit2gtk-4.1-dev gir1.2-webkit2-4.1
+
+# Fedora/RHEL
+sudo dnf install gobject-introspection webkit2gtk4.1
+
+# Arch Linux
+sudo pacman -S webkit2gtk</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>First launch</h4>
+                        <ol style="margin-left: 20px; color: var(--text-muted); line-height: 2;">
+                            <li>Launch the app</li>
+                            <li>Choose <strong>Server mode</strong> or <strong>Client mode</strong></li>
+                            <li>Create your vault passphrase</li>
+                            <li>Set up a PIN for quick unlock</li>
+                            <li>Main screen appears with tabs</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Dashboard tabs</h4>
+                        <ul style="margin-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                            <li><strong>Dashboard</strong> — Server status, connected peers, transfer stats</li>
+                            <li><strong>Clients</strong> — Add, remove, view QR codes</li>
+                            <li><strong>Audit Log</strong> — Events, sessions, file activity</li>
+                            <li><strong>Security</strong> — PIN, TOTP, server hardening</li>
+                            <li><strong>Admins</strong> — Manage admin users</li>
+                            <li><strong>DNS</strong> — Split-DNS mappings</li>
+                            <li><strong>Backup</strong> — Vault backup & restore</li>
+                            <li><strong>Settings</strong> — Configuration</li>
+                            <li><strong>About</strong> — Version info</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Linux CLI -->
+                <div class="method-content" id="cli">
+                    <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-linux-x86_64" target="_blank" class="download-btn primary">
+                            Download CLI (42 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Install</h4>
+                        <div class="code-block">
+                            <pre><code>sudo install -o root -g root -m 755 wireseal-cli-linux-x86_64 /usr/local/bin/wireseal</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Verify</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal --version</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Linux Install Script -->
+                <div class="method-content" id="script">
+                    <p style="margin-bottom: 16px;"><strong>Install Script</strong> — One-liner install with automatic dependencies</p>
+                    
+                    <div class="step-section">
+                        <h4>Install</h4>
+                        <div class="code-block">
+                            <pre><code>curl -fsSL https://github.com/prashanth-7861/WireSeal/releases/latest/download/wireseal-linux.sh -o wireseal-linux.sh
+chmod +x wireseal-linux.sh
+sudo ./wireseal-linux.sh</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p>The install script automatically installs WireGuard, Python, and configures the firewall.</p>
+                    </div>
+                </div>
+                
+                <!-- Linux Usage (CLI & Script) -->
+                <div class="next-section">
+                    <h3>Usage (CLI / Script)</h3>
+                    
+                    <div class="step-section">
+                        <h4>Initialize VPN server</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
+                        </div>
+                        <p class="step-note">Creates vault, generates keys, configures firewall</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Open dashboard</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal serve</code></pre>
+                        </div>
+                        <p class="step-note">Opens web dashboard at http://localhost:8080</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Add client</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal add-client alice</code></pre>
+                        </div>
+                        <p class="step-note">Generate QR code for mobile</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>List clients</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal list-clients</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Show client QR</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal show-qr alice</code></pre>
+                        </div>
+                        <p class="step-note">Display QR code in terminal</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Export client config</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal export alice --output /tmp/alice.conf</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Remove client</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal remove-client alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View status</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal status</code></pre>
+                        </div>
+                        <p class="step-note">Show connected peers and transfer stats</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate client keys</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal rotate-keys alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate server keys</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal rotate-server-keys</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Update endpoint (DuckDNS)</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal update-dns</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Backup vault</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal backup-vault /path/to/backup</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Lock vault</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal lock</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Change passphrase</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal change-passphrase</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View audit log</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal audit-log</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Terminate VPN</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal terminate</code></pre>
+                        </div>
+                        <p class="step-note">Bring down WireGuard interface</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Fresh start</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal fresh-start</code></pre>
+                        </div>
+                        <p class="step-note">Wipe all data and re-initialize</p>
+                    </div>
+                    
+                    <!-- Troubleshooting -->
+                    <div class="next-section">
+                        <h3>Troubleshooting</h3>
+                        <div class="help-grid">
+                            <div class="help-card">
+                                <h4>Permission denied</h4>
+                                <p>Use <code>sudo</code> before commands.</p>
+                            </div>
+                            <div class="help-card">
+                                <h4>WireGuard not found</h4>
+                                <p>Install: <code>sudo apt install wireguard-tools</code></p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Port in use</h4>
+                                <p>Use: <code>sudo wireseal init --port 51821</code></p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Firewall blocked</h4>
+                                <p>WireSeal configures firewall automatically.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- macOS -->
+            <div class="os-content" id="macos">
+                <div class="req-section">
+                    <h3>System requirements</h3>
+                    <ul>
+                        <li>macOS 12 (Monterey) or later</li>
+                        <li>Apple Silicon (M1/M2/M3) or Intel</li>
+                        <li>Homebrew (recommended for install script)</li>
+                    </ul>
+                </div>
+                
+                <div class="method-tabs">
+                    <button class="method-tab active" data-method="desktop">Desktop App</button>
+                    <button class="method-tab" data-method="cli">CLI</button>
+                    <button class="method-tab" data-method="script">Install Script</button>
+                </div>
+                
+                <!-- macOS Desktop App -->
+                <div class="method-content active" id="desktop">
+                    <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-0.7.23-macos-arm64.pkg" target="_blank" class="download-btn primary">
+                            Download Desktop App Installer (45 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Install</h4>
+                        <p>Double-click the .pkg file and follow the installer wizard</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Launch</h4>
+                        <div class="code-block">
+                            <pre><code>open /Applications/WireSeal.app</code></pre>
+                        </div>
+                        <p class="step-note">Or search for "WireSeal" in Spotlight</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>First launch</h4>
+                        <ol style="margin-left: 20px; color: var(--text-muted); line-height: 2;">
+                            <li>Launch the app</li>
+                            <li>Choose <strong>Server mode</strong> or <strong>Client mode</strong></li>
+                            <li>Create your vault passphrase</li>
+                            <li>Set up a PIN for quick unlock</li>
+                            <li>Main screen appears with tabs</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Dashboard tabs</h4>
+                        <ul style="margin-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                            <li><strong>Dashboard</strong> — Server status, connected peers, transfer stats</li>
+                            <li><strong>Clients</strong> — Add, remove, view QR codes</li>
+                            <li><strong>Audit Log</strong> — Events, sessions, file activity</li>
+                            <li><strong>Security</strong> — PIN, TOTP, server hardening</li>
+                            <li><strong>Admins</strong> — Manage admin users</li>
+                            <li><strong>DNS</strong> — Split-DNS mappings</li>
+                            <li><strong>Backup</strong> — Vault backup & restore</li>
+                            <li><strong>Settings</strong> — Configuration</li>
+                            <li><strong>About</strong> — Version info</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- macOS CLI -->
+                <div class="method-content" id="cli">
+                    <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-macos-arm64" target="_blank" class="download-btn primary">
+                            Download CLI (21 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Install</h4>
+                        <div class="code-block">
+                            <pre><code>sudo install -o root -g root -m 755 wireseal-cli-macos-arm64 /usr/local/bin/wireseal</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Verify</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal --version</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- macOS Install Script -->
+                <div class="method-content" id="script">
+                    <p style="margin-bottom: 16px;"><strong>Install Script</strong> — One-liner install with automatic dependencies</p>
+                    
+                    <div class="step-section">
+                        <h4>Install Homebrew (if not installed)</h4>
+                        <div class="code-block">
+                            <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Run install script</h4>
+                        <div class="code-block">
+                            <pre><code>curl -fsSL https://github.com/prashanth-7861/WireSeal/releases/latest/download/wireseal-macos.sh -o wireseal-macos.sh
+chmod +x wireseal-macos.sh
+./wireseal-macos.sh</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- macOS Usage (CLI & Script) -->
+                <div class="next-section">
+                    <h3>Usage (CLI / Script)</h3>
+                    
+                    <div class="step-section">
+                        <h4>Initialize VPN server</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Open dashboard</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal serve</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Add client</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal add-client alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>List clients</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal list-clients</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Show client QR</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal show-qr alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Export client config</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal export alice --output /tmp/alice.conf</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Remove client</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal remove-client alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View status</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal status</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate client keys</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal rotate-keys alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate server keys</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal rotate-server-keys</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Update endpoint (DuckDNS)</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal update-dns</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Backup vault</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal backup-vault /path/to/backup</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Lock vault</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal lock</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Change passphrase</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal change-passphrase</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View audit log</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal audit-log</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Terminate VPN</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal terminate</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Fresh start</h4>
+                        <div class="code-block">
+                            <pre><code>sudo wireseal fresh-start</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Troubleshooting -->
+                    <div class="next-section">
+                        <h3>Troubleshooting</h3>
+                        <div class="help-grid">
+                            <div class="help-card">
+                                <h4>Permission denied</h4>
+                                <p>Use <code>sudo</code> before commands.</p>
+                            </div>
+                            <div class="help-card">
+                                <h4>WireGuard not found</h4>
+                                <p>Install: <code>sudo apt install wireguard-tools</code></p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Port in use</h4>
+                                <p>Use: <code>sudo wireseal init --port 51821</code></p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Firewall blocked</h4>
+                                <p>WireSeal configures firewall automatically.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Windows -->
+            <div class="os-content" id="windows">
+                <div class="req-section">
+                    <h3>System requirements</h3>
+                    <ul>
+                        <li>Windows 10 (1809+) or Windows 11</li>
+                        <li>Administrator privileges</li>
+                    </ul>
+                </div>
+                
+                <div class="method-tabs">
+                    <button class="method-tab active" data-method="desktop">Desktop App</button>
+                    <button class="method-tab" data-method="cli">CLI</button>
+                    <button class="method-tab" data-method="script">PowerShell Script</button>
+                </div>
+                
+                <!-- Windows Desktop App -->
+                <div class="method-content active" id="desktop">
+                    <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-0.7.23-windows-x86_64-setup.exe" target="_blank" class="download-btn primary">
+                            Download Setup Installer (43 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Install</h4>
+                        <p>1. Run the downloaded .exe file<br>2. Follow the installer wizard<br>3. Accept Windows SmartScreen if prompted</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Launch</h4>
+                        <p>Search for "WireSeal" in Start menu</p>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>First launch</h4>
+                        <ol style="margin-left: 20px; color: var(--text-muted); line-height: 2;">
+                            <li>Launch the app</li>
+                            <li>Choose <strong>Server mode</strong> or <strong>Client mode</strong></li>
+                            <li>Create your vault passphrase</li>
+                            <li>Set up a PIN for quick unlock</li>
+                            <li>Main screen appears with tabs</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Dashboard tabs</h4>
+                        <ul style="margin-left: 20px; color: var(--text-muted); line-height: 1.8;">
+                            <li><strong>Dashboard</strong> — Server status, connected peers, transfer stats</li>
+                            <li><strong>Clients</strong> — Add, remove, view QR codes</li>
+                            <li><strong>Audit Log</strong> — Events, sessions, file activity</li>
+                            <li><strong>Security</strong> — PIN, TOTP, server hardening</li>
+                            <li><strong>Admins</strong> — Manage admin users</li>
+                            <li><strong>DNS</strong> — Split-DNS mappings</li>
+                            <li><strong>Backup</strong> — Vault backup & restore</li>
+                            <li><strong>Settings</strong> — Configuration</li>
+                            <li><strong>About</strong> — Version info</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Windows CLI -->
+                <div class="method-content" id="cli">
+                    <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
+                    
+                    <div class="direct-download">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-windows-x86_64.exe" target="_blank" class="download-btn primary">
+                            Download CLI (24 MB)
+                        </a>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Run</h4>
+                        <div class="code-block">
+                            <pre><code>.\wireseal-cli-windows-x86_64.exe --version</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p>Add to PATH: <code>setx PATH "%PATH%;C:\path\to\folder"</code></p>
+                    </div>
+                </div>
+                
+                <!-- Windows PowerShell Script -->
+                <div class="method-content" id="script">
+                    <p style="margin-bottom: 16px;"><strong>PowerShell Script</strong> — One-liner install with automatic dependencies</p>
+                    
+                    <div class="step-section">
+                        <h4 style="color: #f59e0b;">Run as Administrator</h4>
+                        <div class="code-block">
+                            <pre><code>irm https://github.com/prashanth-7861/WireSeal/releases/latest/download/wireseal-windows.ps1 -OutFile wireseal-windows.ps1
+.\wireseal-windows.ps1</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <p>The install script automatically installs WireGuard and configures the firewall.</p>
+                    </div>
+                </div>
+                
+                <!-- Windows Usage (CLI & Script) -->
+                <div class="next-section">
+                    <h3>Usage (CLI / Script)</h3>
+                    
+                    <div class="step-section">
+                        <h4>Initialize VPN server</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Open dashboard</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal serve</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Add client</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal add-client alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>List clients</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal list-clients</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Show client QR</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal show-qr alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Export client config</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal export alice --output C:\temp\alice.conf</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Remove client</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal remove-client alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View status</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal status</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate client keys</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal rotate-keys alice</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Rotate server keys</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal rotate-server-keys</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Update endpoint (DuckDNS)</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal update-dns</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Backup vault</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal backup-vault C:\path\to\backup</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Lock vault</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal lock</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Change passphrase</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal change-passphrase</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>View audit log</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal audit-log</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Terminate VPN</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal terminate</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="step-section">
+                        <h4>Fresh start</h4>
+                        <div class="code-block">
+                            <pre><code>wireseal fresh-start</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Troubleshooting -->
+                    <div class="next-section">
+                        <h3>Troubleshooting</h3>
+                        <div class="help-grid">
+                            <div class="help-card">
+                                <h4>Permission denied</h4>
+                                <p>Run as Administrator.</p>
+                            </div>
+                            <div class="help-card">
+                                <h4>WireGuard not found</h4>
+                                <p>Install WireGuard for Windows.</p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Port in use</h4>
+                                <p>Use: <code>wireseal init --port 51821</code></p>
+                            </div>
+                            <div class="help-card">
+                                <h4>Firewall blocked</h4>
+                                <p>WireSeal configures Windows Firewall.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="setup.js"></script>
+</body>
+</html>

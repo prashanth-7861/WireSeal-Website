@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Server Mode vs Client Mode — Understand the two modes.">
+    <title>WireSeal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding-top: 80px; min-height: 100vh; }
+        
+        .modes-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .modes-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .modes-hero .tagline {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+        
+        .modes-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .modes-section { margin-bottom: 4rem; }
+        
+        .modes-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .modes-section h2 svg { color: var(--accent); }
+        
+        /* Mode Cards */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .mode-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .mode-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .mode-card.server { border-top: 3px solid var(--accent); }
+        .mode-card.client { border-top: 3px solid var(--accent-light); }
+        
+        .mode-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .mode-card h3 {
+            font-size: 1.375rem;
+            font-weight: 700;
+        }
+        
+        .mode-badge {
+            font-size: 0.6875rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .mode-card.server .mode-badge {
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+        
+        .mode-card.client .mode-badge {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-light);
+        }
+        
+        .mode-card > p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        /* Feature Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.625rem 0;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.625rem;
+            font-size: 0.925rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .feature-list li:last-child { border-bottom: none; }
+        
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .feature-icon.check { color: var(--success); }
+        .feature-icon.cross { color: var(--error); }
+        
+        /* Limitations Box */
+        .limitations {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 10px;
+        }
+        
+        .limitations-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--error);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .limitations p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+        
+        /* Architecture */
+        .architecture {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        
+        .arch-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .arch-node {
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .arch-node.device {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+        
+        .arch-node.client {
+            background: rgba(139, 92, 246, 0.12);
+            color: var(--accent-light);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        
+        .arch-node.server {
+            background: var(--accent-glow);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        
+        .arch-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+        
+        .arch-desc {
+            color: var(--text-dim);
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Setup Steps */
+        .steps-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .step:last-child { border-bottom: none; }
+        
+        .step-num {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-content p {
+            color: var(--text-dim);
+            font-size: 0.925rem;
+            margin: 0;
+        }
+        
+        .step-content code {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            background: var(--bg-elevated);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            color: var(--accent);
+        }
+        
+        /* Quick Start Grid */
+        .steps-grid {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .qs-step {
+            flex: 1;
+            min-width: 160px;
+            max-width: 200px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .qs-step:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .qs-step.done {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+        }
+        
+        .qs-num {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.875rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .qs-step.done .qs-num {
+            background: var(--success);
+        }
+        
+        .qs-icon {
+            margin-bottom: 0.75rem;
+            color: var(--text-dim);
+        }
+        
+        .qs-step.done .qs-icon {
+            color: var(--success);
+        }
+        
+        .qs-step h4 {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .qs-step p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .qs-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+            padding: 0 0.25rem;
+        }
+        
+        /* CTA */
+        .cta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+        
+        .cta-box h3 {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cta-box p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html" class="active">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="modes-hero">
+            <h1>Server Mode & Client Mode</h1>
+            <p class="tagline">One app. Two modes. Build your own VPN.</p>
+        </div>
+        
+        <div class="modes-content">
+            <!-- Mode Overview -->
+            <div class="modes-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="M12 8v8"/>
+                        <path d="M8 12h8"/>
+                    </svg>
+                    Understanding the Modes
+                </h2>
+                
+                <div class="mode-grid">
+                    <!-- Server Mode -->
+                    <div class="mode-card server">
+                        <div class="mode-header">
+                            <h3>Server Mode</h3>
+                            <span class="mode-badge">Host</span>
+                        </div>
+                        <p>Runs on a computer at home (or VPS). Creates the VPN server and manages who can connect. Think of it as your home's VPN headquarters.</p>
+                        
+                        <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.75rem;">What it can do</h4>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Create WireGuard VPN server</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Generate & manage client keys</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Create QR codes for easy setup</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>View connected clients</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>See bandwidth usage</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Revoke client access instantly</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Rotate keys on schedule</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Backup & restore vault</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="limitations">
+                            <div class="limitations-title">Cannot do</div>
+                            <p>Cannot connect to other VPN servers — it only accepts incoming connections.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Client Mode -->
+                    <div class="mode-card client">
+                        <div class="mode-header">
+                            <h3>Client Mode</h3>
+                            <span class="mode-badge">Device</span>
+                        </div>
+                        <p>Runs on your laptop, phone, or tablet. Connects TO your home VPN server, giving you access to your home network from anywhere.</p>
+                        
+                        <h4 style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.75rem;">What it can do</h4>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Connect to WireSeal server</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Scan QR code to configure</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>One-click connect/disconnect</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Show connection status</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Display transfer stats</span>
+                            </li>
+                            <li>
+                                <span class="feature-icon check">✓</span>
+                                <span>Auto-connect on app start</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="limitations">
+                            <div class="limitations-title">Cannot do</div>
+                            <p>Cannot accept other connections — it only initiates outbound connections to the server.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- How They Connect -->
+            <div class="modes-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                        <path d="M15 3h6v6"/>
+                        <path d="M10 14L21 3"/>
+                    </svg>
+                    How They Connect
+                </h2>
+                
+                <div class="architecture">
+                    <div class="arch-diagram">
+                        <div class="arch-node device">Your Laptop</div>
+                        <span class="arch-arrow">→</span>
+                        <div class="arch-node client">Client Mode</div>
+                        <span class="arch-arrow">⇄</span>
+                        <div class="arch-node server">Server Mode</div>
+                        <span class="arch-arrow">→</span>
+                        <div class="arch-node device">Home Network</div>
+                    </div>
+                    <p class="arch-desc">
+                        <strong>Client Mode</strong> devices connect through <strong>Server Mode</strong> to access your home network. All traffic is encrypted end-to-end via WireGuard protocol.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Quick Start -->
+            <div class="modes-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <path d="M14 2v6h6"/>
+                        <path d="M12 18v-6"/>
+                        <path d="M9 15h6"/>
+                    </svg>
+                    Quick Start
+                </h2>
+                
+                <div class="steps-grid">
+                    <div class="qs-step">
+                        <div class="qs-num">1</div>
+                        <div class="qs-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                <path d="M8 21h8"/>
+                                <path d="M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h4>Run Server</h4>
+                        <p>Install WireSeal on your home computer or VPS. Choose <strong>Server Mode</strong>. Set passphrase. Click Start.</p>
+                    </div>
+                    
+                    <div class="qs-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="qs-step">
+                        <div class="qs-num">2</div>
+                        <div class="qs-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M7 7h10v10H7z"/>
+                            </svg>
+                        </div>
+                        <h4>Get Config</h4>
+                        <p>Run <code>add-client</code> or click Clients tab. Get QR code or save config file.</p>
+                    </div>
+                    
+                    <div class="qs-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="qs-step">
+                        <div class="qs-num">3</div>
+                        <div class="qs-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </div>
+                        <h4>Connect</h4>
+                        <p>Install on your device. Choose <strong>Client Mode</strong>. Scan QR or load config. Click connect.</p>
+                    </div>
+                    
+                    <div class="qs-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14"/>
+                            <path d="M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="qs-step done">
+                        <div class="qs-num">✓</div>
+                        <div class="qs-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                <path d="M22 4L12 14.01l-3-3"/>
+                            </svg>
+                        </div>
+                        <h4>Done</h4>
+                        <p>Your device is on your home network. Access files, SSH, cameras — anywhere.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="cta-box">
+                <h3>Ready to build your VPN?</h3>
+                <p>Follow the setup guide to get started.</p>
+                <div class="btn-group">
+                    <a href="setup.html" class="btn btn-primary">Setup Guide</a>
+                    <a href="privacy.html" class="btn btn-ghost">Privacy Details</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

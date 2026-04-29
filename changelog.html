@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog — WireSeal</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cl-hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: radial-gradient(ellipse at top, rgba(60, 160, 240, 0.08) 0%, transparent 60%);
+        }
+        .cl-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tagline {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .cl-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #3ca0f0 0%, rgba(60, 160, 240, 0.2) 100%);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 1.2rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3ca0f0;
+            box-shadow: 0 0 12px rgba(60, 160, 240, 0.5);
+        }
+        .timeline-dot.patch {
+            width: 10px;
+            height: 10px;
+            background: #2a8a40;
+            box-shadow: 0 0 10px rgba(42, 138, 64, 0.4);
+        }
+        .timeline-dot.minor {
+            background: #f0a030;
+            box-shadow: 0 0 12px rgba(240, 160, 48, 0.5);
+        }
+        .timeline-dot.major {
+            width: 14px;
+            height: 14px;
+            background: #f03050;
+            box-shadow: 0 0 14px rgba(240, 48, 80, 0.5);
+        }
+
+        .release-card {
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid rgba(60, 160, 240, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .release-card:hover {
+            border-color: rgba(60, 160, 240, 0.25);
+            transform: translateX(4px);
+        }
+
+        .release-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .ver-tag {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .type-pill {
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .type-pill.major {
+            background: rgba(240, 48, 80, 0.2);
+            color: #f03050;
+        }
+        .type-pill.minor {
+            background: rgba(240, 160, 48, 0.2);
+            color: #f0a030;
+        }
+        .type-pill.patch {
+            background: rgba(42, 138, 64, 0.2);
+            color: #2a8a40;
+        }
+        .date-tag {
+            color: #555;
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+
+        .change-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .change-list li {
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: #bbb;
+            line-height: 1.5;
+        }
+        .change-list li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: #3ca0f0;
+            font-weight: 700;
+        }
+
+        .foot {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(60, 160, 240, 0.1);
+            margin-top: 3rem;
+        }
+        .foot p {
+            color: #444;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html" class="active">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <div class="cl-hero">
+        <h1>Changelog</h1>
+        <p class="tagline">Every version we've shipped since the beginning.</p>
+    </div>
+
+    <div class="cl-container">
+        <div class="timeline">
+            <!-- v0.7.23 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.23</span>
+                        <span class="type-pill major">Major</span>
+                        <span class="date-tag">April 27, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>NSIS auto-upgrade fix — drop outer quotes around $R1 in registry</li>
+                        <li>Server init now surfaces real exception class + message (not generic 500)</li>
+                        <li>Full traceback to stderr + audit entry with error_class field</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.22 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.22</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 26, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
+                        <li>Fixed PIN setup error from mode-confused UI surface</li>
+                        <li>Added "mode": "server" to cache dict in _h_init server path</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.21 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.21</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 26, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
+                        <li>Fixed PIN setup error from mode-confused UI surface</li>
+                        <li>Added "mode": "server" to cache dict in _h_init server path</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.20 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.20</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 26, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.4 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.4</span>
+                        <span class="type-pill minor">Minor</span>
+                        <span class="date-tag">April 13, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Auto-update — check, download, and install new releases from the Dashboard</li>
+                        <li>GET /api/update/check queries GitHub Releases API</li>
+                        <li>POST /api/update/install downloads + runs platform installer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.3</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 12, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Add logo, update checker, changelog, and credits to About page</li>
+                        <li>Welcome screen shows wax-seal logo instead of generic Shield icon</li>
+                        <li>Changelog section with expandable version history (v0.5.0 through v0.7.2)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.2</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 12, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Custom app icon — charcoal + electric blue wax seal logo</li>
+                        <li>Windows EXE, NSIS installer, and Dashboard favicon use new icon</li>
+                        <li>Multi-size ICO (16-256px) embedded in Windows builds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.1</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">April 12, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Fix Windows installer CLI/GUI collision (NTFS case-insensitive)</li>
+                        <li>Install CLI binary into $INSTDIR\bin\wireseal.exe</li>
+                        <li>PATH updated to point at $INSTDIR\bin</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.7.0 -->
+            <div class="timeline-item">
+                <div class="timeline-dot major"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.7.0</span>
+                        <span class="type-pill major">Major</span>
+                        <span class="date-tag">April 10, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Windows installer fix (onedir mode)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.4.0 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.4.0</span>
+                        <span class="type-pill minor">Minor</span>
+                        <span class="date-tag">April 2, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Production hardening milestone — rate limiting, PIN quick unlock</li>
+                        <li>Session timeout, graceful shutdown, health endpoint</li>
+                        <li>Audit log rotation, vault backup/restore, key rotation API</li>
+                        <li>Raspberry Pi / ARM64 + headless mode support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.6 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.6</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 24, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Ensure pythonnet/EdgeChromium bundled in Windows GUI binary</li>
+                        <li>Explicitly install pythonnet, clr-loader, pystray, Pillow on Windows CI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.5 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.5</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 23, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Add Security dashboard with server hardening for Linux</li>
+                        <li>Score card, defense status cards, security checks grid</li>
+                        <li>One-click Harden Server button (SSH, kernel, fail2ban, auto-updates)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.4 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.4</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 23, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Use system typelib paths for GTK on all distros (Arch, Fedora, RHEL, Debian)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.3</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 22, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Comprehensive Windows fixes — all buttons and features now work</li>
+                        <li>Windows uses WireGuard tunnel services (sc.exe, wireguard.exe), NOT wg-quick</li>
+                        <li>add-client / remove-client: WireGuard config reload is now best-effort</li>
+                        <li>Lock vault works from any page (Layout.tsx handles state)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.2</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 22, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Make init resilient — vault creation succeeds even if WireGuard setup fails</li>
+                        <li>Platform operations run as best-effort steps after vault creation</li>
+                        <li>Failures returned as warnings in response</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.1 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.1</span>
+                        <span class="type-pill patch">Patch</span>
+                        <span class="date-tag">March 22, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Suppress console windows and blank screen on all platforms</li>
+                        <li>Add CREATE_NO_WINDOW flag to all subprocess.run() calls on Windows</li>
+                        <li>Redirect stdout/stderr to devnull on Windows GUI mode</li>
+                        <li>Windows fallback in status endpoint: check WireGuard via sc.exe query</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.3.0 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.3.0</span>
+                        <span class="type-pill minor">Minor</span>
+                        <span class="date-tag">March 22, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Add web dashboard + bundle into standalone binary</li>
+                        <li>React dashboard (Vite/TypeScript/Tailwind) with 5 pages</li>
+                        <li>Full REST API server (stdlib only) via `wireseal serve`</li>
+                        <li>Clients page: QR side panel with 60s countdown + Regenerate</li>
+                        <li>401 auto-recovery: vault lock detected, returns to Start Server screen</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.2.0 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.2.0</span>
+                        <span class="type-pill minor">Minor</span>
+                        <span class="date-tag">March 22, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Custom app icon — charcoal + electric blue wax seal logo</li>
+                        <li>Multi-size ICO (16-256px) embedded in Windows builds</li>
+                        <li>PNG icon set for Linux/macOS builds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- v0.1.0 -->
+            <div class="timeline-item">
+                <div class="timeline-dot patch"></div>
+                <div class="release-card">
+                    <div class="release-header">
+                        <span class="ver-tag">v0.1.0</span>
+                        <span class="type-pill minor">Minor</span>
+                        <span class="date-tag">March 21, 2026</span>
+                    </div>
+                    <ul class="change-list">
+                        <li>Fix release: pass --repo to gh release upload</li>
+                        <li>CI job: sign-and-release now explicitly sets GITHUB_REPOSITORY</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="foot">
+        <p>WireSeal — Secure your connections with ease.</p>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

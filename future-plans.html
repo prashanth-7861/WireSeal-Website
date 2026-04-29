@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Changelog — Complete release history from v0.1.0 to latest.">
+    <title>WireSeal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding-top: 80px; min-height: 100vh; }
+        
+        .cl-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cl-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .cl-hero .tagline {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+        }
+        
+        .cl-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        /* Navigation Tabs */
+        .cl-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .cl-tab {
+            padding: 10px 24px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text-dim);
+            font-family: var(--font-display);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .cl-tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        
+        .cl-content { display: none; animation: fadeIn 0.4s ease; }
+        .cl-content.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Timeline Style */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--border));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -31px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        
+        .timeline-dot.minor { background: #eab308; box-shadow: 0 0 0 2px #eab308; }
+        .timeline-dot.patch { background: #22c55e; box-shadow: 0 0 0 2px #22c55e; }
+        
+        .release-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .ver-tag {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+        
+        .date-tag {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        
+        .type-pill {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: var(--bg-light);
+            color: var(--text-muted);
+        }
+        
+        .type-pill.major { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .type-pill.minor { color: #eab308; background: rgba(234, 179, 8, 0.1); }
+        .type-pill.patch { color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        
+        .change-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .change-list li {
+            padding: 0.4rem 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .change-list li:before {
+            content: "→";
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        /* Roadmap Style */
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .phase-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .phase-card:hover { transform: translateY(-5px); }
+        
+        .phase-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .status-planned { background: #64748b; }
+        .status-progress { background: #eab308; box-shadow: 0 0 5px #eab308; }
+        
+        .phase-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: var(--bg-light);
+            color: var(--text-muted);
+            margin-right: 6px;
+            margin-bottom: 6px;
+            border: 1px solid var(--border);
+        }
+        
+        .contribute-banner {
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-light) 100%);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html" class="active">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <div class="cl-hero">
+        <h1>Future Plans</h1>
+        <p class="tagline">What's coming next for WireSeal.</p>
+    </div>
+
+    <div class="cl-container">
+        <div class="cl-nav">
+            <button class="cl-tab active" onclick="showTab('roadmap')">Future Plans</button>
+        </div>
+
+<!-- Roadmap View -->
+        <div class="cl-content active" id="roadmap">
+            <div class="phase-grid">
+                <div class="phase-card">
+                    <h3>Mobile Apps <span class="status-dot status-planned"></span></h3>
+                    <p>Bringing the power of WireSeal to your pocket.</p>
+                    <div class="feature-pill">iOS Native</div>
+                    <div class="feature-pill">Android Native</div>
+                    <div class="feature-pill">One-tap connect</div>
+                </div>
+
+                <div class="phase-card">
+                    <h3>Connectivity <span class="status-dot status-planned"></span></h3>
+                    <p>Ensuring your tunnel never drops, no matter the network.</p>
+                    <div class="feature-pill">Auto-reconnect</div>
+                    <div class="feature-pill">Keepalive</div>
+                    <div class="feature-pill">Network-switched</div>
+                </div>
+
+                <div class="phase-card">
+                    <h3>DNS Intelligence <span class="status-dot status-planned"></span></h3>
+                    <p>Smart routing and content filtering at the DNS level.</p>
+                    <div class="feature-pill">Split-DNS</div>
+                    <div class="feature-pill">Ad-blocking</div>
+                    <div class="feature-pill">Parental Locks</div>
+                </div>
+
+                <div class="phase-card">
+                    <h3>Integrations <span class="status-dot status-planned"></span></h3>
+                    <p>Connecting WireSeal to your existing smart home ecosystem.</p>
+                    <div class="feature-pill">Home Assistant</div>
+                    <div class="feature-pill">Webhooks</div>
+                    <div class="feature-pill">Device Tracking</div>
+                </div>
+
+                <div class="phase-card">
+                    <h3>Scaling <span class="status-dot status-planned"></span></h3>
+                    <p>Enterprise-grade multi-server management.</p>
+                    <div class="feature-pill">Multi-Hub</div>
+                    <div class="feature-pill">Cloud VPS Sync</div>
+                    <div class="feature-pill">Global Switching</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contribute-banner">
+            <h3>Join the development</h3>
+            <p>WireSeal is an open project. We welcome contributors, testers, and feedback.</p>
+            <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-primary" target="_blank">View GitHub Repository</a>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            var contents = document.querySelectorAll('.cl-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].style.display = 'none';
+            }
+            
+            var tabs = document.querySelectorAll('.cl-tab');
+            for (var j = 0; j < tabs.length; j++) {
+                tabs[j].classList.remove('active');
+            }
+            
+            document.getElementById(tabName).style.display = 'block';
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+<div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html" class="active">Future Plans</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

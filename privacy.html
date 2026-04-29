@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Privacy & Security — Zero plaintext secrets, encrypted vault, local-first.">
+    <title>WireSeal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        .privacy-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .privacy-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .privacy-hero .tagline {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+        
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        .privacy-section {
+            margin-bottom: 3rem;
+        }
+        
+        .privacy-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .privacy-section h2 svg {
+            color: var(--accent);
+        }
+        
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .privacy-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        
+        .privacy-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .privacy-card p {
+            color: var(--text-dim);
+            font-size: 0.925rem;
+            line-height: 1.6;
+        }
+        
+        .principle-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .principle-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .principle-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .principle-list .check {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+        
+        .principle-list .principle-content h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .principle-list .principle-content p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+        
+        .table-section {
+            overflow-x: auto;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-elevated);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-light);
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 500;
+        }
+        
+        .comparison-table .check-mark {
+            color: var(--accent);
+        }
+        
+        .comparison-table .cross-mark {
+            color: var(--text-dim);
+        }
+        
+        .faq-section {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .faq-item h4 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-item p {
+            color: var(--text-dim);
+            font-size: 0.925rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-mark">▸</span> WireSeal
+            </a>
+<div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <a href="setup.html" class="nav-btn">Get started</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="privacy-hero">
+            <h1>Privacy & Security</h1>
+            <p class="tagline">Zero plaintext secrets. Local-first architecture. Your data stays yours.</p>
+        </div>
+        
+        <div class="privacy-content">
+            <!-- Core Principles -->
+            <div class="privacy-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Core Principles
+                </h2>
+                
+                <ul class="principle-list">
+                    <li>
+                        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <div class="principle-content">
+                            <h4>Encrypted vault</h4>
+                            <p>Your WireGuard keys never exist in plaintext. The vault is sealed with your passphrase, derived via Argon2id.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <div class="principle-content">
+                            <h4>No account required</h4>
+                            <p>No email, no signup, no cloud account. You are your own identity. Your server, your VPN.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <div class="principle-content">
+                            <h4>Local-first</h4>
+                            <p>All data stays on your server. No cloud sync, no external API calls. Works when internet is down.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                        <div class="principle-content">
+                            <h4>You control your data</h4>
+                            <p>Export your keys anytime. Backup to a password-protected file. Restore on any machine.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Encryption Details -->
+            <div class="privacy-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                    </svg>
+                    Encryption Details
+                </h2>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h3>Vault Encryption</h3>
+                        <p>AES-256-GCM with Argon2id key derivation. Your passphrase never stored. Only the verification hash.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>VPN Protocol</h3>
+                        <p>WireGuard with ChaCha20-Poly1305. Post-quantum ready. Same protocol the NSA and EFF recommend.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>Key Rotation</h3>
+                        <p>Rotate client keys anytime via CLI. Old keys revoked automatically. Or schedule automated rotation.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>Two-Factor Auth</h3>
+                        <p>TOTP support via authenticator apps. Second factor required after PIN changes or device resets.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Comparison -->
+            <div class="privacy-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+                        <path d="M9 14h6"/>
+                        <path d="M9 10h6"/>
+                    </svg>
+                    How We Compare
+                </h2>
+                
+                <div class="table-section">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>WireSeal</th>
+                                <th>Manual WG</th>
+                                <th>WG-Easy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Encrypted vault</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                                <td>No cloud account</td>
+                                <td class="check-mark">✓</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                            <tr>
+                                <td>Local-first</td>
+                                <td class="check-mark">✓</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                                <td>TOTP 2FA</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                                <td>Argon2id KDF</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                                <td>Audit logging</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="check-mark">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Auto key rotation</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                            <tr>
+                                <td>Desktop app</td>
+                                <td class="check-mark">✓</td>
+                                <td class="cross-mark">✗</td>
+                                <td class="cross-mark">✗</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Data Collected -->
+            <div class="privacy-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                    </svg>
+                    What We Don't Collect
+                </h2>
+                
+                <div class="privacy-grid">
+                    <div class="privacy-card">
+                        <h3>No usage telemetry</h3>
+                        <p>We don't track how you use WireSeal. No analytics, no crash reports that send data out.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>No connection data</h3>
+                        <p>Your VPN traffic stays in your network. No proxy, no intermediate servers see your data.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>No cloud dependencies</h3>
+                        <p>Runs entirely on your hardware. No external API downtimes can affect your VPN.</p>
+                    </div>
+                    
+                    <div class="privacy-card">
+                        <h3>No device fingerprints</h3>
+                        <p>No advertising IDs, no device tokens, no marketing tracking. Just you.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ -->
+            <div class="privacy-section">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    Frequently Asked
+                </h2>
+                
+                <div class="faq-section">
+                    <div class="faq-item">
+                        <h4>Can I lose access to my VPN if I forget my passphrase?</h4>
+                        <p>Yes — there's no "forgot password" flow because there's no account. That's by design. Your passphrase encrypts the vault. Without it, keys are unrecoverable. We recommend backing up your vault to a file.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>What happens if my server is compromised?</h4>
+                        <p>An attacker would need your passphrase to decrypt the vault. Without it, your keys are safe. You can rotate server keys and revoke all clients instantly.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Can WireSeal see my keys?</h4>
+                        <p>No. The vault is sealed with your passphrase. Keys exist only in memory briefly during operations and are never logged or transmitted.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Is this open source?</h4>
+                        <p>Yes. WireSeal is open source on GitHub. You're free to audit the code, fork it, or run it yourself.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">▸</span> WireSeal
+            </div>
+            <p>Your home. From anywhere.</p>
+<div class="footer-links">
+                <a href="privacy.html">Privacy</a>
+                <a href="modes.html">Modes</a>
+                <a href="remote.html">Remote</a>
+                <a href="setup.html">Setup</a>
+                <a href="future-plans.html">Future Plans</a>
+                <a href="changelog.html">Changelog</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
