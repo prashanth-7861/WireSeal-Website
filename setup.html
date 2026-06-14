@@ -487,7 +487,18 @@ chmod +x wireseal-macos.sh
                             <pre><code>sudo wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
                         </div>
                     </div>
-                    
+
+                    <div class="step-section">
+                        <h4>Forward the WireGuard port on your router <span class="tag tag-paid">Required for remote access</span></h4>
+                        <p>To reach your home from outside, add <strong>one port-forward rule</strong> in your router's admin page. WireSeal configures the server's own firewall + NAT automatically, but it can't change your router for you:</p>
+                        <ul>
+                            <li><strong>Protocol:</strong> <strong>UDP</strong> — WireGuard is UDP, so a TCP rule will not work</li>
+                            <li><strong>External / WAN port:</strong> the port you picked at <code>init</code> — default <code>51820</code></li>
+                            <li><strong>Forward to:</strong> your server's LAN IP (e.g. <code>192.168.1.100</code>) on the same port</li>
+                        </ul>
+                        <p class="step-note">Changed <code>--port</code>? Forward that port instead. If your ISP rotates your public IP, run <code>wireseal duckdns &lt;name&gt;</code> so clients always find you. Automatic UPnP/NAT-PMP forwarding is on the roadmap.</p>
+                    </div>
+
                     <div class="step-section">
                         <h4>Open dashboard</h4>
                         <div class="code-block">
@@ -737,7 +748,18 @@ chmod +x wireseal-macos.sh
                             <pre><code>wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
                         </div>
                     </div>
-                    
+
+                    <div class="step-section">
+                        <h4>Forward the WireGuard port on your router <span class="tag tag-paid">Required for remote access</span></h4>
+                        <p>To reach your home from outside, add <strong>one port-forward rule</strong> in your router's admin page. WireSeal configures the server's own firewall + NAT automatically, but it can't change your router for you:</p>
+                        <ul>
+                            <li><strong>Protocol:</strong> <strong>UDP</strong> — WireGuard is UDP, so a TCP rule will not work</li>
+                            <li><strong>External / WAN port:</strong> the port you picked at <code>init</code> — default <code>51820</code></li>
+                            <li><strong>Forward to:</strong> your server's LAN IP (e.g. <code>192.168.1.100</code>) on the same port</li>
+                        </ul>
+                        <p class="step-note">Changed <code>--port</code>? Forward that port instead. If your ISP rotates your public IP, run <code>wireseal duckdns &lt;name&gt;</code> so clients always find you. Automatic UPnP/NAT-PMP forwarding is on the roadmap.</p>
+                    </div>
+
                     <div class="step-section">
                         <h4>Open dashboard</h4>
                         <div class="code-block">
