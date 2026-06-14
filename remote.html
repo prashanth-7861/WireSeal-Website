@@ -277,6 +277,21 @@
         </div>
         
         <div class="mobile-content">
+            <!-- One-time router setup (required for remote access) -->
+            <div class="mobile-section" style="border:1px solid var(--border);border-left:3px solid var(--primary);background:rgba(16,185,129,0.06);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;">
+                <h2 style="margin-top:0;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+                    One-time router setup
+                </h2>
+                <p>To reach your home from outside your network, forward the WireGuard port on your router once. WireSeal sets up the server's firewall automatically — the router rule is the one thing it can't do for you:</p>
+                <ul>
+                    <li><strong>Protocol:</strong> <strong>UDP</strong> (WireGuard is UDP — a TCP rule won't work)</li>
+                    <li><strong>External / WAN port:</strong> the port you chose at setup — default <strong>51820</strong></li>
+                    <li><strong>Forward to:</strong> your WireSeal server's LAN IP (e.g. <code>192.168.1.100</code>), same port</li>
+                </ul>
+                <p style="margin-bottom:0;color:var(--text-secondary);font-size:0.92rem;">If your ISP changes your public IP, set up DuckDNS so clients always find you. Automatic UPnP/NAT-PMP forwarding is on the roadmap.</p>
+            </div>
+
             <!-- Apps Overview -->
             <div class="mobile-section">
                 <h2>
