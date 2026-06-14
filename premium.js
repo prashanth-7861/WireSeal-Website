@@ -14,6 +14,29 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  // ---- Theme toggle (was unwired sitewide) ----
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  document.querySelectorAll('.theme-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var next = currentTheme() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  });
+
+  // ---- Mobile nav toggle (hamburger) ----
+  var navToggle = document.querySelector('.nav-toggle');
+  var navMenu = document.querySelector('.nav-menu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      navMenu.classList.toggle('is-open');
+      navToggle.classList.toggle('is-active');
+    });
+  }
+
   if (reduce || !('IntersectionObserver' in window)) return;
 
   // ---- Auto-tag below-the-fold elements for reveal ----
