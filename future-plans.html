@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="WireSeal Changelog — Complete release history from v0.1.0 to latest.">
-    <title>WireSeal</title>
+    <meta name="description" content="WireSeal Future Plans — Roadmap and upcoming features for WireSeal VPN.">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;">
+    <title>Future Plans — WireSeal</title>
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-new.css">
     <style>
         body { padding-top: 80px; min-height: 100vh; }
         
@@ -60,7 +61,7 @@
         
         .cl-tab.active {
             background: var(--accent);
-            color: white;
+            color: var(--text);
             border-color: var(--accent);
             box-shadow: 0 0 15px var(--accent-glow);
         }
@@ -236,20 +237,40 @@
     </style>
 </head>
 <body>
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">
-                <span class="logo-mark">▸</span> WireSeal
+    <script>
+        // Prevent dark mode flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">◈</span>
+                <span class="brand-name">WireSeal</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="modes.html">Modes</a>
-                <a href="setup.html">Setup</a>
-                <a href="future-plans.html" class="active">Future Plans</a>
-                <a href="changelog.html">Changelog</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#download" class="nav-link">Download</a>
+                <a href="changelog.html" class="nav-link">Changelog</a>
             </div>
-            <a href="setup.html" class="nav-btn">Get started</a>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-ghost" target="_blank">GitHub</a>
+                <a href="index.html#download" class="btn btn-primary">Download</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -311,7 +332,7 @@
         <div class="contribute-banner">
             <h3>Join the development</h3>
             <p>WireSeal is an open project. We welcome contributors, testers, and feedback.</p>
-            <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-primary" target="_blank">View GitHub Repository</a>
+            <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View GitHub Repository</a>
         </div>
     </div>
 
@@ -344,9 +365,53 @@
                 <a href="remote.html">Remote</a>
                 <a href="setup.html">Setup</a>
                 <a href="future-plans.html" class="active">Future Plans</a>
-                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                const htmlElement = document.documentElement;
+                
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    updateThemeIcon(true);
+                }
+                
+                themeToggle.addEventListener('click', () => {
+                    const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+                    if (isDark) {
+                        htmlElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                        updateThemeIcon(false);
+                    } else {
+                        htmlElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateThemeIcon(true);
+                    }
+                });
+                
+                function updateThemeIcon(isDark) {
+                    const sunIcon = themeToggle.querySelector('.icon-sun');
+                    const moonIcon = themeToggle.querySelector('.icon-moon');
+                    if (sunIcon && moonIcon) {
+                        if (isDark) {
+                            sunIcon.style.display = 'none';
+                            moonIcon.style.display = 'block';
+                        } else {
+                            sunIcon.style.display = 'block';
+                            moonIcon.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

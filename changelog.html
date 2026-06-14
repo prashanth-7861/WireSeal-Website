@@ -3,528 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WireSeal Changelog — Complete release history">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com">
     <title>Changelog — WireSeal</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .cl-hero {
-            text-align: center;
-            padding: 4rem 2rem 3rem;
-            background: radial-gradient(ellipse at top, rgba(60, 160, 240, 0.08) 0%, transparent 60%);
-        }
-        .cl-hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .tagline {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .cl-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #3ca0f0 0%, rgba(60, 160, 240, 0.2) 100%);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            padding-left: 1.5rem;
-        }
-        .timeline-dot {
-            position: absolute;
-            left: -2rem;
-            top: 1.2rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #3ca0f0;
-            box-shadow: 0 0 12px rgba(60, 160, 240, 0.5);
-        }
-        .timeline-dot.patch {
-            width: 10px;
-            height: 10px;
-            background: #2a8a40;
-            box-shadow: 0 0 10px rgba(42, 138, 64, 0.4);
-        }
-        .timeline-dot.minor {
-            background: #f0a030;
-            box-shadow: 0 0 12px rgba(240, 160, 48, 0.5);
-        }
-        .timeline-dot.major {
-            width: 14px;
-            height: 14px;
-            background: #f03050;
-            box-shadow: 0 0 14px rgba(240, 48, 80, 0.5);
-        }
-
-        .release-card {
-            background: rgba(20, 20, 30, 0.6);
-            border: 1px solid rgba(60, 160, 240, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-        }
-        .release-card:hover {
-            border-color: rgba(60, 160, 240, 0.25);
-            transform: translateX(4px);
-        }
-
-        .release-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .ver-tag {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
-        }
-        .type-pill {
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .type-pill.major {
-            background: rgba(240, 48, 80, 0.2);
-            color: #f03050;
-        }
-        .type-pill.minor {
-            background: rgba(240, 160, 48, 0.2);
-            color: #f0a030;
-        }
-        .type-pill.patch {
-            background: rgba(42, 138, 64, 0.2);
-            color: #2a8a40;
-        }
-        .date-tag {
-            color: #555;
-            font-size: 0.85rem;
-            margin-left: auto;
-        }
-
-        .change-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .change-list li {
-            padding: 0.4rem 0;
-            padding-left: 1.25rem;
-            position: relative;
-            color: #bbb;
-            line-height: 1.5;
-        }
-        .change-list li::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: #3ca0f0;
-            font-weight: 700;
-        }
-
-        .foot {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(60, 160, 240, 0.1);
-            margin-top: 3rem;
-        }
-        .foot p {
-            color: #444;
-            font-size: 0.85rem;
-        }
-    </style>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-new.css">
+    <title>Changelog — WireSeal</title>
 </head>
 <body>
-    <nav>
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">
-                <span class="logo-mark">▸</span> WireSeal
+    <script>
+        // Prevent dark mode flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">◈</span>
+                <span class="brand-name">WireSeal</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="modes.html">Modes</a>
-                <a href="remote.html">Remote</a>
-                <a href="setup.html">Setup</a>
-                <a href="future-plans.html">Future Plans</a>
-                <a href="changelog.html" class="active">Changelog</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#download" class="nav-link">Download</a>
+                <a href="changelog.html" class="nav-link">Changelog</a>
             </div>
-            <a href="setup.html" class="nav-btn">Get started</a>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-ghost" target="_blank">GitHub</a>
+                <a href="index.html#download" class="btn btn-primary">Download</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
-    <div class="cl-hero">
-        <h1>Changelog</h1>
-        <p class="tagline">Every version we've shipped since the beginning.</p>
-    </div>
-
-    <div class="cl-container">
-        <div class="timeline">
-            <!-- v0.7.23 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.23</span>
-                        <span class="type-pill major">Major</span>
-                        <span class="date-tag">April 27, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>NSIS auto-upgrade fix — drop outer quotes around $R1 in registry</li>
-                        <li>Server init now surfaces real exception class + message (not generic 500)</li>
-                        <li>Full traceback to stderr + audit entry with error_class field</li>
-                    </ul>
-                </div>
+    <!-- Header -->
+    <section class="section" style="padding-top: 8rem; padding-bottom: 2rem;">
+        <div class="section-container">
+            <div class="section-header center">
+                <span class="section-tag">Changelog</span>
+                <h1 class="section-title">Release History</h1>
+                <p class="section-subtitle">All WireSeal releases, automatically fetched from GitHub</p>
             </div>
+        </div>
+    </section>
 
-            <!-- v0.7.22 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.22</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 26, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
-                        <li>Fixed PIN setup error from mode-confused UI surface</li>
-                        <li>Added "mode": "server" to cache dict in _h_init server path</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.21 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.21</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 26, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
-                        <li>Fixed PIN setup error from mode-confused UI surface</li>
-                        <li>Added "mode": "server" to cache dict in _h_init server path</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.20 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.20</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 26, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Fixed cache.mode missing on server init (broke server UI)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.4 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.4</span>
-                        <span class="type-pill minor">Minor</span>
-                        <span class="date-tag">April 13, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Auto-update — check, download, and install new releases from the Dashboard</li>
-                        <li>GET /api/update/check queries GitHub Releases API</li>
-                        <li>POST /api/update/install downloads + runs platform installer</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.3 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.3</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 12, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Add logo, update checker, changelog, and credits to About page</li>
-                        <li>Welcome screen shows wax-seal logo instead of generic Shield icon</li>
-                        <li>Changelog section with expandable version history (v0.5.0 through v0.7.2)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.2 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.2</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 12, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Custom app icon — charcoal + electric blue wax seal logo</li>
-                        <li>Windows EXE, NSIS installer, and Dashboard favicon use new icon</li>
-                        <li>Multi-size ICO (16-256px) embedded in Windows builds</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.1 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.1</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">April 12, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Fix Windows installer CLI/GUI collision (NTFS case-insensitive)</li>
-                        <li>Install CLI binary into $INSTDIR\bin\wireseal.exe</li>
-                        <li>PATH updated to point at $INSTDIR\bin</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.7.0 -->
-            <div class="timeline-item">
-                <div class="timeline-dot major"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.7.0</span>
-                        <span class="type-pill major">Major</span>
-                        <span class="date-tag">April 10, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Windows installer fix (onedir mode)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.4.0 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.4.0</span>
-                        <span class="type-pill minor">Minor</span>
-                        <span class="date-tag">April 2, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Production hardening milestone — rate limiting, PIN quick unlock</li>
-                        <li>Session timeout, graceful shutdown, health endpoint</li>
-                        <li>Audit log rotation, vault backup/restore, key rotation API</li>
-                        <li>Raspberry Pi / ARM64 + headless mode support</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.6 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.6</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 24, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Ensure pythonnet/EdgeChromium bundled in Windows GUI binary</li>
-                        <li>Explicitly install pythonnet, clr-loader, pystray, Pillow on Windows CI</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.5 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.5</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 23, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Add Security dashboard with server hardening for Linux</li>
-                        <li>Score card, defense status cards, security checks grid</li>
-                        <li>One-click Harden Server button (SSH, kernel, fail2ban, auto-updates)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.4 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.4</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 23, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Use system typelib paths for GTK on all distros (Arch, Fedora, RHEL, Debian)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.3 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.3</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 22, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Comprehensive Windows fixes — all buttons and features now work</li>
-                        <li>Windows uses WireGuard tunnel services (sc.exe, wireguard.exe), NOT wg-quick</li>
-                        <li>add-client / remove-client: WireGuard config reload is now best-effort</li>
-                        <li>Lock vault works from any page (Layout.tsx handles state)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.2 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.2</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 22, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Make init resilient — vault creation succeeds even if WireGuard setup fails</li>
-                        <li>Platform operations run as best-effort steps after vault creation</li>
-                        <li>Failures returned as warnings in response</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.1 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.1</span>
-                        <span class="type-pill patch">Patch</span>
-                        <span class="date-tag">March 22, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Suppress console windows and blank screen on all platforms</li>
-                        <li>Add CREATE_NO_WINDOW flag to all subprocess.run() calls on Windows</li>
-                        <li>Redirect stdout/stderr to devnull on Windows GUI mode</li>
-                        <li>Windows fallback in status endpoint: check WireGuard via sc.exe query</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.3.0 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.3.0</span>
-                        <span class="type-pill minor">Minor</span>
-                        <span class="date-tag">March 22, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Add web dashboard + bundle into standalone binary</li>
-                        <li>React dashboard (Vite/TypeScript/Tailwind) with 5 pages</li>
-                        <li>Full REST API server (stdlib only) via `wireseal serve`</li>
-                        <li>Clients page: QR side panel with 60s countdown + Regenerate</li>
-                        <li>401 auto-recovery: vault lock detected, returns to Start Server screen</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.2.0 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.2.0</span>
-                        <span class="type-pill minor">Minor</span>
-                        <span class="date-tag">March 22, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Custom app icon — charcoal + electric blue wax seal logo</li>
-                        <li>Multi-size ICO (16-256px) embedded in Windows builds</li>
-                        <li>PNG icon set for Linux/macOS builds</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- v0.1.0 -->
-            <div class="timeline-item">
-                <div class="timeline-dot patch"></div>
-                <div class="release-card">
-                    <div class="release-header">
-                        <span class="ver-tag">v0.1.0</span>
-                        <span class="type-pill minor">Minor</span>
-                        <span class="date-tag">March 21, 2026</span>
-                    </div>
-                    <ul class="change-list">
-                        <li>Fix release: pass --repo to gh release upload</li>
-                        <li>CI job: sign-and-release now explicitly sets GITHUB_REPOSITORY</li>
-                    </ul>
+    <!-- Changelog Timeline -->
+    <section class="section" style="padding-top: 0;">
+        <div class="section-container">
+            <div id="changelog-timeline" class="changelog-list">
+                <div class="loading-state">
+                    <p>Loading release history...</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="foot">
-        <p>WireSeal — Secure your connections with ease.</p>
-    </div>
-
+    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-inner">
+        <div class="footer-container">
             <div class="footer-brand">
-                <span class="logo-mark">▸</span> WireSeal
+                <span class="brand-icon">◈</span>
+                <span class="brand-name">WireSeal</span>
+                <span class="brand-version">v1.0.0</span>
             </div>
-            <p>Your home. From anywhere.</p>
             <div class="footer-links">
+                <a href="https://github.com/prashanth-7861/WireSeal">GitHub</a>
                 <a href="privacy.html">Privacy</a>
-                <a href="modes.html">Modes</a>
-                <a href="remote.html">Remote</a>
-                <a href="setup.html">Setup</a>
-                <a href="future-plans.html">Future Plans</a>
-                <a href="changelog.html">Changelog</a>
-                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+                <a href="index.html">Home</a>
+            </div>
+            <div class="footer-copy">
+                © 2024 Prashanth Mudigonda. Open source, forever free.
             </div>
         </div>
     </footer>
+
+    <style>
+        .changelog-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        
+        .release-item {
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+        
+        .release-item:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .release-tag {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .release-date {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .release-body {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+        
+        .release-body h4 {
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .release-body ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        .release-body li {
+            margin-bottom: 0.375rem;
+        }
+        
+        .release-body code {
+            background: var(--surface-elevated);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            color: var(--primary);
+        }
+        
+        .release-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .release-link:hover {
+            color: var(--primary-dark);
+        }
+    </style>
+
+    <script>
+        // Escape HTML so release notes from the GitHub API cannot inject
+        // markup / event handlers (e.g. <img onerror=...>) into the page.
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+            });
+        }
+        async function fetchAllReleases() {
+            const container = document.getElementById('changelog-timeline');
+            try {
+                const response = await fetch('https://api.github.com/repos/prashanth-7861/WireSeal/releases?per_page=15');
+                const releases = await response.json();
+                
+                let html = '';
+                for (const release of releases) {
+                    const pubDate = new Date(release.published_at);
+                    const dateStr = pubDate.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
+                    
+                    let bodyHtml = '';
+                    if (release.body) {
+                        const lines = release.body.split('\n');
+                        let inList = false;
+                        for (const line of lines) {
+                            if (line.startsWith('### ')) {
+                                if (inList) { bodyHtml += '</ul>'; inList = false; }
+                                bodyHtml += `<h4>${esc(line.replace('### ', ''))}</h4>`;
+                            } else if (line.startsWith('- ')) {
+                                if (!inList) { bodyHtml += '<ul>'; inList = true; }
+                                // Escape first, THEN turn `code` spans into <code> tags
+                                // so only our own markup is HTML, never the note content.
+                                const li = esc(line.replace('- ', '')).replace(/`([^`]+)`/g, '<code>$1</code>');
+                                bodyHtml += `<li>${li}</li>`;
+                            }
+                        }
+                        if (inList) bodyHtml += '</ul>';
+                    }
+                    
+                    html += `
+                        <div class="release-item">
+                            <div class="release-header">
+                                <span class="release-tag">${esc(release.tag_name)}</span>
+                                <span class="release-date">${esc(dateStr)}</span>
+                            </div>
+                            <div class="release-body">${bodyHtml}</div>
+                            <a href="${esc(release.html_url)}" class="release-link" target="_blank" rel="noopener noreferrer">
+                                View release notes →
+                            </a>
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = html;
+            } catch (error) {
+                container.innerHTML = `
+                    <div class="release-item">
+                        <div class="release-header">
+                            <span class="release-tag">v1.0.0</span>
+                            <span class="release-date">May 7, 2026</span>
+                        </div>
+                        <div class="release-body">
+                            <h4>Fixed</h4>
+                            <ul>
+                                <li>SSH TOFU host key capture — replaced broken approach with proper <code>_TofuCapturingClient</code> SSHClient subclass</li>
+                                <li>Fingerprint and key export now resolve correctly instead of showing <code>&lt;unknown fingerprint&gt;</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchAllReleases);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                const htmlElement = document.documentElement;
+                
+                // Check for saved theme preference or use system preference
+                const savedTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    updateThemeIcon(true);
+                }
+                
+                themeToggle.addEventListener('click', () => {
+                    const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+                    if (isDark) {
+                        htmlElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                        updateThemeIcon(false);
+                    } else {
+                        htmlElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateThemeIcon(true);
+                    }
+                });
+                
+                function updateThemeIcon(isDark) {
+                    const sunIcon = themeToggle.querySelector('.icon-sun');
+                    const moonIcon = themeToggle.querySelector('.icon-moon');
+                    if (sunIcon && moonIcon) {
+                        if (isDark) {
+                            sunIcon.style.display = 'none';
+                            moonIcon.style.display = 'block';
+                        } else {
+                            sunIcon.style.display = 'block';
+                            moonIcon.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

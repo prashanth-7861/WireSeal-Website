@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="WireSeal Installation">
-    <title>WireSeal</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.github.com">
+    <title>Setup Guide — WireSeal</title>
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-new.css">
     <link rel="stylesheet" href="setup.css">
     <style>
         .os-sidebar { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
@@ -24,22 +25,40 @@
     </style>
 </head>
 <body>
-    <!-- Nav -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">
-                <span class="logo-mark">▸</span> WireSeal
+    <script>
+        // Prevent dark mode flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-icon">◈</span>
+                <span class="brand-name">WireSeal</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="modes.html">Modes</a>
-                <a href="remote.html">Remote</a>
-                <a href="setup.html" class="active">Setup</a>
-                <a href="future-plans.html">Future Plans</a>
-                <a href="changelog.html">Changelog</a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#download" class="nav-link">Download</a>
+                <a href="changelog.html" class="nav-link">Changelog</a>
             </div>
-            <a href="setup.html" class="nav-btn">Get started</a>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <a href="https://github.com/prashanth-7861/WireSeal" class="btn btn-ghost" target="_blank">GitHub</a>
+                <a href="index.html#download" class="btn btn-primary">Download</a>
+            </div>
+            <button class="nav-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
 
@@ -83,7 +102,7 @@
                     <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/WireSeal-linux-x86_64" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/WireSeal-linux-x86_64" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download Desktop App (44 MB)
                         </a>
                     </div>
@@ -142,7 +161,7 @@ sudo pacman -S webkit2gtk</code></pre>
                     <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-linux-x86_64" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/wireseal-cli-linux-x86_64" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download CLI (42 MB)
                         </a>
                     </div>
@@ -357,7 +376,7 @@ sudo ./wireseal-linux.sh</code></pre>
                     <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-0.7.23-macos-arm64.pkg" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/wireseal-1.0.0-macos-arm64.pkg" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download Desktop App Installer (45 MB)
                         </a>
                     </div>
@@ -407,7 +426,7 @@ sudo ./wireseal-linux.sh</code></pre>
                     <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-macos-arm64" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/wireseal-cli-macos-arm64" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download CLI (21 MB)
                         </a>
                     </div>
@@ -617,7 +636,7 @@ chmod +x wireseal-macos.sh
                     <p style="margin-bottom: 16px;"><strong>Desktop App</strong> — If you prefer a graphical interface with mouse clicks</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-0.7.23-windows-x86_64-setup.exe" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/wireseal-1.0.0-windows-x86_64-setup.exe" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download Setup Installer (43 MB)
                         </a>
                     </div>
@@ -664,7 +683,7 @@ chmod +x wireseal-macos.sh
                     <p style="margin-bottom: 16px;"><strong>CLI</strong> — If you prefer typing commands in terminal</p>
                     
                     <div class="direct-download">
-                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v0.7.23/wireseal-cli-windows-x86_64.exe" target="_blank" class="download-btn primary">
+                        <a href="https://github.com/prashanth-7861/WireSeal/releases/download/v1.0.0/wireseal-cli-windows-x86_64.exe" target="_blank" rel="noopener noreferrer" class="download-btn primary">
                             Download CLI (24 MB)
                         </a>
                     </div>
@@ -686,7 +705,7 @@ chmod +x wireseal-macos.sh
                     <p style="margin-bottom: 16px;"><strong>PowerShell Script</strong> — One-liner install with automatic dependencies</p>
                     
                     <div class="step-section">
-                        <h4 style="color: #f59e0b;">Run as Administrator</h4>
+                        <h4 style="color: var(--warning);">Run as Administrator</h4>
                         <div class="code-block">
                             <pre><code>irm https://github.com/prashanth-7861/WireSeal/releases/latest/download/wireseal-windows.ps1 -OutFile wireseal-windows.ps1
 .\wireseal-windows.ps1</code></pre>
@@ -862,11 +881,58 @@ chmod +x wireseal-macos.sh
                 <a href="setup.html">Setup</a>
                 <a href="future-plans.html">Future Plans</a>
                 <a href="changelog.html">Changelog</a>
-                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank">GitHub</a>
+                <a href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     </footer>
 
     <script src="setup.js"></script>
+</body>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile nav toggle
+            document.querySelector('.nav-toggle').addEventListener('click', () => {
+                document.querySelector('.nav-menu').classList.toggle('active');
+            });
+            
+            // Theme toggle
+            const themeToggle = document.querySelector('.theme-toggle');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme preference or use system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                htmlElement.setAttribute('data-theme', 'dark');
+                updateThemeIcon(true);
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+                if (isDark) {
+                    htmlElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeIcon(false);
+                } else {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeIcon(true);
+                }
+            });
+            
+            function updateThemeIcon(isDark) {
+                const sunIcon = themeToggle.querySelector('.icon-sun');
+                const moonIcon = themeToggle.querySelector('.icon-moon');
+                if (isDark) {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

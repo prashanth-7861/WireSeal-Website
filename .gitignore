@@ -8,3 +8,15 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Internal planning / AI config — must NEVER deploy on the public site
+.mcp.json
+.claude/
+.claude-flow/
+.swarm/
+.opencode/
+CLAUDE.md
+TOTP-plan.md
+Access-Control-Plan.md
+SECURITY_AUDIT_REPORT.md
+Repo/

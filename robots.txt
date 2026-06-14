@@ -1,0 +1,14 @@
+# robots.txt for WireSeal Website
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://prashanth-7861.github.io/WireSeal/sitemap.xml
+
+# Disallow private/admin areas (if any in future)
+Disallow: /private/
+Disallow: /admin/
+
+# Crawl delay (optional, helps reduce server load)
+Crawl-delay: 1
