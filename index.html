@@ -7,7 +7,7 @@
     <meta name="keywords" content="WireGuard, self-hosted VPN, home network, zero trust, zero telemetry, encrypted vault, audit log, access control, Tailscale alternative, open source">
     <meta name="author" content="Prashanth Mudigonda">
     <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.github.com">
     <meta name="theme-color" content="#0F172A">
     
     <meta property="og:type" content="website">
@@ -29,9 +29,7 @@
     </script>
     
     <link rel="icon" href="logo.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts.css">
     <link rel="stylesheet" href="style-new.css">
     
     <title>WireSeal — Your Home Network, From Anywhere</title>
@@ -216,48 +214,48 @@
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
-                    <h3>Military-Grade Encryption</h3>
-                    <p>Every connection is encrypted with ChaCha20-Poly1305, the same algorithm used by the NSA and tech giants.</p>
+                    <h3>Encrypted multi-admin vault</h3>
+                    <p>Keys, configs, and credentials live in a dual-layer AES-256-GCM + ChaCha20-Poly1305 vault with Argon2id and TOTP 2FA. Steal the file without the passphrase and you get nothing.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
                     </div>
-                    <h3>Access from Anywhere</h3>
-                    <p>Connect from any network — coffee shop, hotel, cellular. Your home is always within reach.</p>
+                    <h3>Tamper-evident audit log</h3>
+                    <p>Every privileged action is SHA-256 hash-chained on your own machine. Alter or delete an entry and WireSeal flags it. Your logs stay with you — not in someone else's cloud.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                     </div>
-                    <h3>Full Network Access</h3>
-                    <p>SSH terminals, SFTP file transfers, NAS drives, IP cameras, smart home — all accessible.</p>
+                    <h3>Per-client access control</h3>
+                    <p>Restrict each client to specific LAN resources — e.g. only Plex on 10.0.0.10:32400 — enforced by the host firewall. Least privilege by default, not all-or-nothing.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
                     </div>
-                    <h3>Built-in 2FA</h3>
-                    <p>Protect your configs with TOTP two-factor authentication. Your keys stay secure.</p>
+                    <h3>Access anything, from anywhere</h3>
+                    <p>An encrypted WireGuard tunnel from any network — SSH terminals, SFTP, NAS, IP cameras, smart home — with live per-peer connection stats and LAN device discovery.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg>
                     </div>
-                    <h3>Encrypted Backups</h3>
-                    <p>Export and backup your configuration with AES-256 encryption. Restore with your password.</p>
+                    <h3>Encrypted, scheduled backups</h3>
+                    <p>Back up your vault to local disk, SSH, or WebDAV on a schedule, and restore safely. The backup is the encrypted vault itself — useless to anyone without your passphrase.</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
                     </div>
-                    <h3>Open Source</h3>
-                    <p>100% open source and auditable. Verify the code yourself. No hidden backdoors.</p>
+                    <h3>Zero telemetry, fully yours</h3>
+                    <p>No cloud control plane, no account, no analytics. Open source and security-audited; the management API binds to localhost only. Verify the code — and the audit — yourself.</p>
                 </div>
             </div>
         </div>
@@ -309,7 +307,7 @@
                     <div class="comp-other cross">✗ Auth keys</div>
                 </div>
                 <div class="comp-row">
-                    <div class="comp-feature">Audit Logging</div>
+                    <div class="comp-feature">Tamper-Evident Audit Log</div>
                     <div class="comp-wireseal check">✓ Full logs</div>
                     <div class="comp-other cross">✗ None</div>
                     <div class="comp-other cross">✗ None</div>
