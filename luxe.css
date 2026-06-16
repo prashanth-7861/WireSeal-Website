@@ -4,8 +4,8 @@
    ===================================================================== */
 
 :root {
-  --ink: #05080d;
-  --ink-2: #080d14;
+  --ink: #050408;
+  --ink-2: #07060c;
   --panel: rgba(255, 255, 255, 0.025);
   --panel-2: rgba(255, 255, 255, 0.045);
   --line: rgba(170, 200, 188, 0.12);
@@ -54,11 +54,11 @@ img { display: block; max-width: 100%; }
 .atmos__aurora {
   position: absolute; inset: -25%;
   background:
-    radial-gradient(38vw 38vw at 18% 12%, rgba(52,211,153,0.22), transparent 60%),
-    radial-gradient(42vw 42vw at 85% 6%, rgba(34,211,238,0.16), transparent 60%),
-    radial-gradient(48vw 48vw at 72% 92%, rgba(124,131,255,0.14), transparent 62%);
-  filter: blur(20px) saturate(1.1);
-  animation: aurora 22s var(--ease) infinite alternate;
+    radial-gradient(40vw 40vw at 16% 10%, rgba(52,211,153,0.16), transparent 62%),
+    radial-gradient(46vw 46vw at 86% 4%, rgba(34,211,238,0.14), transparent 62%),
+    radial-gradient(50vw 50vw at 74% 96%, rgba(34,211,238,0.07), transparent 64%);
+  filter: blur(24px) saturate(1.05);
+  animation: aurora 24s var(--ease) infinite alternate;
 }
 @keyframes aurora { 0% { transform: translate3d(-3%, -2%, 0) scale(1); } 100% { transform: translate3d(3%, 2%, 0) scale(1.08); } }
 .atmos__grid {
@@ -171,6 +171,12 @@ img { display: block; max-width: 100%; }
 .vault__row b { font-family: var(--sans); font-weight: 600; }
 .vault__row .v { margin-left: auto; color: var(--muted); }
 .vault__row.glow { box-shadow: inset 0 0 24px rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.25); }
+
+/* 3D network-mesh centerpiece */
+.hero__visual { position: relative; display: grid; place-items: center; }
+.netcanvas { width: 100%; max-width: 560px; aspect-ratio: 1; display: block; }
+.hero__chip { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(5,4,8,0.55); backdrop-filter: blur(10px); white-space: nowrap; }
+.hero__chip .ok { color: var(--emerald); }
 
 /* ---------- Marquee ---------- */
 .marquee { border-block: 1px solid var(--line); padding-block: 1.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }

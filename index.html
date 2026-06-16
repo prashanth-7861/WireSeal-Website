@@ -66,15 +66,9 @@
                 </div>
             </div>
 
-            <div class="hero__visual" data-parallax data-speed="0.06">
-                <div class="vault" data-rv data-rv-d="2">
-                    <div class="vault__bar"><i></i><i></i><i></i><span>wireseal · dashboard</span></div>
-                    <div class="vault__row glow"><span class="ok">●</span><b>Vault</b><span class="v">unlocked · 2FA</span></div>
-                    <div class="vault__row"><span class="ok">↑↓</span><b>alice — iphone</b><span class="v">12.4 / 45.2 MB/s</span></div>
-                    <div class="vault__row"><span class="ok">↑↓</span><b>bear — laptop</b><span class="v">2.1 / 9.8 MB/s</span></div>
-                    <div class="vault__row"><span style="color:var(--dim)">◷</span><b>guest — tv</b><span class="v">acl · plex only</span></div>
-                    <div class="vault__row glow"><span class="ok">✓</span><b>Audit chain</b><span class="v">verified · 1,284</span></div>
-                </div>
+            <div class="hero__visual">
+                <canvas class="netcanvas" id="net" data-parallax data-speed="0.04" aria-hidden="true"></canvas>
+                <span class="hero__chip"><span class="ok">●</span> encrypted mesh · localhost-only control plane</span>
             </div>
         </div>
     </section>
