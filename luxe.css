@@ -23,6 +23,8 @@
   --grad-soft: linear-gradient(135deg, rgba(52,211,153,0.16), rgba(34,211,238,0.10));
 
   --display: 'Sora', system-ui, sans-serif;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --grotesk: 'Space Grotesk', 'Sora', sans-serif;
   --sans: 'Inter', system-ui, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 
@@ -84,6 +86,13 @@ img { display: block; max-width: 100%; }
 }
 .kicker::before { content: ""; width: 26px; height: 1px; background: var(--emerald); opacity: 0.7; }
 .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+/* Editorial serif/sans contrast: accent words in big headings become Fraunces italic */
+.hero h1 .grad-text, .head h2 .grad-text, .cta h2 .grad-text, .manifesto em {
+  font-family: var(--serif); font-style: italic; font-weight: 500; letter-spacing: -0.015em;
+}
+/* Space Grotesk for data/brand/marquee */
+.lx-brand span, .hero__meta .m b, .marquee__track span, .cmp__row.head-row { font-family: var(--grotesk); }
+.hero__meta .m b { letter-spacing: -0.02em; }
 
 /* ---------- Nav ---------- */
 .lx-nav {

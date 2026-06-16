@@ -76,6 +76,12 @@ h1, h2, h3, .section-title, .hero-title, .mobile-hero h1, .cl-title, .install-ti
   background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/* editorial serif accent words inside headings */
+h1 .gradient-text, h1 .highlight, h2 .gradient-text, h2 .highlight,
+.section-title .gradient-text, .section-title .highlight {
+  font-family: 'Fraunces', Georgia, serif !important; font-style: italic; font-weight: 500;
+}
+.brand-name { font-family: 'Space Grotesk', sans-serif !important; }
 
 /* ---- 4. Nav (glass) ---- */
 .navbar {
