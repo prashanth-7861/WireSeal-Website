@@ -150,6 +150,8 @@ img { display: block; max-width: 100%; }
 .hero__meta .m { display: flex; flex-direction: column; gap: 0.2rem; }
 .hero__meta .m b { font-family: var(--display); font-weight: 800; font-size: 1.5rem; }
 .hero__meta .m span { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+.hero__copy { position: relative; }
+.hero__copy::before { content: ""; position: absolute; left: -12%; top: 6%; width: 55%; height: 55%; background: radial-gradient(closest-side, rgba(52,211,153,0.14), transparent 70%); filter: blur(34px); z-index: -1; pointer-events: none; }
 
 /* Hero visual: glass vault terminal */
 .vault {
@@ -174,7 +176,8 @@ img { display: block; max-width: 100%; }
 
 /* 3D network-mesh centerpiece */
 .hero__visual { position: relative; display: grid; place-items: center; }
-.netcanvas { width: 100%; max-width: 560px; aspect-ratio: 1; display: block; }
+.netcanvas { width: 100%; max-width: 620px; aspect-ratio: 1; display: block; }
+.hero__visual::before { content: ""; position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(34,211,238,0.10), transparent 70%); filter: blur(40px); pointer-events: none; }
 .hero__chip { position: absolute; bottom: 4%; left: 50%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); padding: 0.5rem 0.95rem; border: 1px solid var(--line); border-radius: 999px; background: rgba(5,4,8,0.55); backdrop-filter: blur(10px); white-space: nowrap; }
 .hero__chip .ok { color: var(--emerald); }
 
@@ -195,13 +198,17 @@ img { display: block; max-width: 100%; }
 /* ---------- Bento features ---------- */
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.1rem; }
 .cell {
-  position: relative; border-radius: 22px; padding: 1.9rem;
-  background: var(--panel); border: 1px solid var(--line);
-  overflow: hidden; transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+  position: relative; border-radius: 22px; padding: 2.1rem;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(52,211,153,0.06), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018));
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 50px -36px rgba(0,0,0,0.8);
+  overflow: hidden; transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   will-change: transform; grid-column: span 2;
 }
 .cell::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: radial-gradient(140% 140% at 0% 0%, rgba(52,211,153,0.6), transparent 45%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.4s var(--ease); }
-.cell:hover { transform: translateY(-6px); background: var(--panel-2); border-color: transparent; }
+.cell:hover { transform: translateY(-6px); border-color: transparent; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 30px 60px -30px rgba(0,0,0,0.9), 0 0 50px -20px var(--glow); }
 .cell:hover::before { opacity: 1; }
 .cell--wide { grid-column: span 3; }
 .cell--tall { grid-column: span 3; }
