@@ -161,14 +161,9 @@ body::after {
   background: var(--gradient-primary); transition: width 0.3s var(--ease);
 }
 .nav-link:hover::after { width: 100%; }
-.brand-icon { color: var(--primary-light); filter: drop-shadow(0 0 10px var(--accent-glow)); display: inline-flex; align-items: center; }
-.brand-icon svg { display: block; }
-
-/* Theme toggle: show one icon per theme (was showing both) */
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: inline-block; }
-[data-theme="dark"] .theme-toggle .icon-sun { display: inline-block; }
-[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+.brand-icon { display: inline-flex; align-items: center; filter: none; }
+.brand-mark, .brand-icon img { display: block; height: 30px; width: auto; }
+.footer-brand .brand-mark, .footer-brand .brand-icon img { height: 26px; }
 
 /* ---- 5. Buttons --------------------------------------------------- */
 .btn { transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease); will-change: transform; }
