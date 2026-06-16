@@ -1,7 +1,13 @@
 /* WireSeal luxe — motion & interactions. Vanilla, no deps. */
 (function () {
   'use strict';
+  document.documentElement.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Safety net: if anything goes wrong with the observer, reveal everything
+  // after 2.5s so content is never left invisible.
+  setTimeout(function () {
+    document.querySelectorAll('[data-rv], .reveal-line').forEach(function (el) { el.classList.add('in'); });
+  }, 2500);
 
   // ---- Sticky nav state ----
   var nav = document.getElementById('nav');
