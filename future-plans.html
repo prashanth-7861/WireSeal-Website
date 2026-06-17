@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -237,14 +237,14 @@
 </head>
 <body>
     <script>
-        // Prevent dark mode flash
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
+      (function() {
+        var saved = localStorage.getItem('ws-theme');
+        if (saved) {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
     </script>
     <!-- Navigation -->
     <nav class="navbar">
@@ -262,7 +262,7 @@
                 <a href="changelog.html" class="nav-link">Changelog</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
                 </button>
@@ -371,48 +371,17 @@
         </div>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Theme toggle
-            const themeToggle = document.querySelector('.theme-toggle');
-            if (themeToggle) {
-                const htmlElement = document.documentElement;
-                
-                const savedTheme = localStorage.getItem('theme');
-                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                    htmlElement.setAttribute('data-theme', 'dark');
-                    updateThemeIcon(true);
-                }
-                
-                themeToggle.addEventListener('click', () => {
-                    const isDark = htmlElement.getAttribute('data-theme') === 'dark';
-                    if (isDark) {
-                        htmlElement.removeAttribute('data-theme');
-                        localStorage.setItem('theme', 'light');
-                        updateThemeIcon(false);
-                    } else {
-                        htmlElement.setAttribute('data-theme', 'dark');
-                        localStorage.setItem('theme', 'dark');
-                        updateThemeIcon(true);
-                    }
-                });
-                
-                function updateThemeIcon(isDark) {
-                    const sunIcon = themeToggle.querySelector('.icon-sun');
-                    const moonIcon = themeToggle.querySelector('.icon-moon');
-                    if (sunIcon && moonIcon) {
-                        if (isDark) {
-                            sunIcon.style.display = 'none';
-                            moonIcon.style.display = 'block';
-                        } else {
-                            sunIcon.style.display = 'block';
-                            moonIcon.style.display = 'none';
-                        }
-                    }
-                }
-            }
-        });
+      (function() {
+        var toggle = document.getElementById('themeToggle');
+        if (toggle) {
+          toggle.addEventListener('click', function() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('ws-theme', next);
+          });
+        }
+      })();
     </script>
     <script src="premium.js" defer></script>
 </body>

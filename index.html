@@ -1,181 +1,639 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="WireSeal — the audited, zero-trust, zero-telemetry home network gateway you fully own. Encrypted WireGuard tunnels, per-client access control, and a tamper-evident audit log. Open source, no cloud, no account.">
-    <meta name="keywords" content="WireGuard, self-hosted VPN, home network, zero trust, zero telemetry, encrypted vault, audit log, access control, Tailscale alternative, open source">
-    <meta name="author" content="Prashanth Mudigonda">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.github.com">
-    <meta name="theme-color" content="#05080d">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="WireSeal — The home network gateway you fully own">
-    <meta property="og:description" content="Audited, zero-trust, zero-telemetry self-hosted WireGuard. No cloud, no account — your keys never leave your box.">
-    <meta property="og:image" content="https://prashanth-7861.github.io/WireSeal/wireseal-logo.png">
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"WireSeal","description":"The audited, zero-trust, zero-telemetry self-hosted WireGuard home network gateway you fully own.","url":"https://github.com/prashanth-7861/WireSeal","applicationCategory":"SecurityApplication","operatingSystem":"Linux, macOS, Windows","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"softwareVersion":"1.0.0"}
-    </script>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="luxe.css">
-    <title>WireSeal — The home network gateway you fully own</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WireSeal — the audited, zero-trust, zero-telemetry home network gateway you fully own. Encrypted WireGuard tunnels, per-client ACLs, tamper-evident audit log.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="WireSeal — Your home network. Yours alone.">
+  <meta property="og:description" content="Self-hosted WireGuard gateway. No cloud, no account, no telemetry. Your keys never leave your box.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="luxe.css">
+  <title>WireSeal — Your home network. Yours alone.</title>
 </head>
 <body>
-    <div class="atmos" aria-hidden="true">
-        <div class="atmos__aurora" data-parallax data-speed="-0.15"></div>
-        <div class="atmos__grid"></div>
-        <div class="atmos__grain"></div>
+
+  <!-- Nav -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="index.html"><img src="wireseal-logo.png" alt="WireSeal">WireSeal</a>
+    <nav class="nav__links" id="links">
+      <a href="#features">Features</a>
+      <a href="#security">Security</a>
+      <a href="#compare">Compare</a>
+      <a href="setup.html">Setup</a>
+      <a href="remote.html">Remote</a>
+      <a href="modes.html">Modes</a>
+      <a href="changelog.html">Changelog</a>
+    </nav>
+    <div class="nav__cta">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a class="btn btn--ghost btn--sm" href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn--primary btn--sm" href="setup.html">Get WireSeal</a>
+      <button class="nav__burger" id="burger" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     </div>
+  </header>
 
-    <!-- Nav -->
-    <header class="lx-nav" id="nav">
-        <a class="lx-brand" href="index.html"><img src="wireseal-logo.png" alt="WireSeal"><span>WireSeal</span></a>
-        <nav class="lx-links" id="links">
-            <a href="#features">Features</a>
-            <a href="#why">Why WireSeal</a>
-            <a href="#compare">Compare</a>
-            <a href="setup.html">Setup</a>
-            <a href="changelog.html">Changelog</a>
-        </nav>
-        <div class="lx-nav__cta">
-            <a class="btn btn--ghost btn--sm" href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a class="btn btn--primary btn--sm" href="setup.html">Get WireSeal</a>
-            <button class="lx-burger" id="burger" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  <!-- Hero -->
+  <section class="hero wrap">
+    <div class="hero__inner">
+      <div>
+        <div class="hero__badge" data-rv><span class="dot"></span> v1.0.0 — Security Audited</div>
+        <h1 data-rv data-rv-d="1">Your home network.<br><span class="grad">Yours alone.</span></h1>
+        <p class="hero__sub" data-rv data-rv-d="2">A self-hosted WireGuard gateway with no cloud, no account, and no telemetry. Your keys never leave your box — every privileged action is written to a tamper-evident audit log on your own machine.</p>
+        <div class="hero__cta" data-rv data-rv-d="3">
+          <a class="btn btn--primary" href="setup.html">Get Started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener">View on GitHub</a>
         </div>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero wrap">
-        <div class="hero__inner">
-            <div class="hero__copy">
-                <span class="hero__badge" data-rv><span class="dot"></span> v1.0.0 — Security Audited</span>
-                <h1>
-                    <span class="line reveal-line"><span>Your home network.</span></span>
-                    <span class="line reveal-line" data-rv-d="1"><span class="grad-text">Yours alone.</span></span>
-                </h1>
-                <p class="hero__sub" data-rv data-rv-d="2">A self-hosted WireGuard gateway with no cloud, no account, and no telemetry. Your keys never leave your box — and every privileged action is written to a tamper-evident audit log on your own machine.</p>
-                <div class="hero__cta" data-rv data-rv-d="3">
-                    <a class="btn btn--primary" href="setup.html">Get WireSeal <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                    <a class="btn btn--ghost" href="#why">Why it's different</a>
-                </div>
-                <div class="hero__meta" data-rv data-rv-d="4">
-                    <div class="m"><b class="grad-text">256-bit</b><span>Dual-layer AEAD</span></div>
-                    <div class="m"><b class="grad-text">0</b><span>Telemetry · accounts</span></div>
-                    <div class="m"><b class="grad-text">100%</b><span>Open source</span></div>
-                </div>
-            </div>
-
-            <div class="hero__visual">
-                <canvas class="netcanvas" id="net" data-parallax data-speed="0.04" aria-hidden="true"></canvas>
-                <span class="hero__chip"><span class="ok">●</span> encrypted mesh · localhost-only control plane</span>
-            </div>
+        <div class="hero__stats" data-rv data-rv-d="4">
+          <div class="hero__stat"><b>256-bit</b><span>AEAD encryption</span></div>
+          <div class="hero__stat"><b>0</b><span>Telemetry points</span></div>
+          <div class="hero__stat"><b>100%</b><span>Open source</span></div>
         </div>
-    </section>
-
-    <!-- Marquee -->
-    <div class="marquee" data-rv>
-        <div class="marquee__track">
-            <span>Encrypted vault</span><span>Tamper-evident audit</span><span>Per-client ACLs</span><span>Zero telemetry</span><span>Self-hosted</span><span>TOTP 2FA</span>
-            <span>Encrypted vault</span><span>Tamper-evident audit</span><span>Per-client ACLs</span><span>Zero telemetry</span><span>Self-hosted</span><span>TOTP 2FA</span>
+      </div>
+      <div class="hero__visual" data-rv data-rv-d="2">
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
+            <span class="terminal__title">wireseal — ssh terminal</span>
+          </div>
+          <div class="terminal__body">
+            <div class="terminal__line"><span class="prompt">$</span><span class="cmd">sudo wireseal init --subnet 192.168.1.0/24</span></div>
+            <div class="terminal__line"><span class="out">Generating server keypair...</span></div>
+            <div class="terminal__line"><span class="out">Writing wg0.conf...</span></div>
+            <div class="terminal__line"><span class="ok">✓ Vault sealed. WireGuard started.</span></div>
+            <div class="terminal__line" style="margin-top:0.5rem"><span class="prompt">$</span><span class="cmd">sudo wireseal add-client alice</span></div>
+            <div class="terminal__line"><span class="out">Client IP: 192.168.1.2</span></div>
+            <div class="terminal__line"><span class="ok">✓ Keys stored in vault. Config ready.</span></div>
+            <div class="terminal__line" style="margin-top:0.5rem"><span class="prompt">$</span><span class="cmd">sudo wireseal status</span></div>
+            <div class="terminal__line"><span class="out">Interface: wg0  Listening: 51820/udp</span></div>
+            <div class="terminal__line"><span class="out">Peers: 1  Handshake: 4s ago</span></div>
+            <div class="terminal__line"><span class="ok">✓ All systems nominal.</span></div>
+          </div>
         </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Features -->
-    <section class="section wrap" id="features">
-        <div class="head" data-rv>
-            <span class="kicker">Capabilities</span>
-            <h2>A gateway, not a <span class="grad-text">configurator.</span></h2>
-            <p>Everything you need to run secure, controlled, observable access to your home — shipped in v1.0.0.</p>
-        </div>
-        <div class="bento">
-            <div class="cell cell--wide" data-rv>
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-                <h3>Encrypted multi-admin vault</h3>
-                <p>Keys, configs, and credentials live in a dual-layer AES-256-GCM + ChaCha20-Poly1305 vault with Argon2id and TOTP 2FA. Steal the file without the passphrase and you get nothing.</p>
-            </div>
-            <div class="cell cell--tall" data-rv data-rv-d="1">
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-                <h3>Tamper-evident audit log</h3>
-                <p>Every privileged action is SHA-256 hash-chained on your own machine. Alter or delete an entry and WireSeal flags it. Your logs stay with you — not in someone else's cloud.</p>
-            </div>
-            <div class="cell" data-rv data-rv-d="2">
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-                <h3>Per-client ACLs</h3>
-                <p>Restrict each client to specific LAN resources — enforced by the host firewall.</p>
-            </div>
-            <div class="cell" data-rv data-rv-d="3">
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></div>
-                <h3>Access from anywhere</h3>
-                <p>SSH, SFTP, NAS, cameras, smart home — with live per-peer stats and LAN discovery.</p>
-            </div>
-            <div class="cell" data-rv data-rv-d="4">
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></div>
-                <h3>Scheduled backups</h3>
-                <p>Encrypted vault backups to local, SSH, or WebDAV — on a schedule, restorable safely.</p>
-            </div>
-            <div class="cell cell--wide" data-rv data-rv-d="2">
-                <div class="cell__ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
-                <h3>Zero telemetry, fully yours</h3>
-                <p>No cloud control plane, no account, no analytics. Open source and security-audited; the management API binds to localhost only. Verify the code — and the audit — yourself.</p>
-            </div>
-        </div>
-    </section>
+  <!-- Logos -->
+  <div class="logos" data-rv>
+    <div class="logos__inner wrap">
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> WireGuard</div>
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> AES-256</div>
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Audited</div>
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg> Linux</div>
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4"/></svg> macOS</div>
+      <div class="logos__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Windows</div>
+    </div>
+  </div>
 
-    <!-- Manifesto -->
-    <section class="section wrap manifesto" id="why">
-        <span class="kicker" data-rv>The wedge</span>
-        <p data-rv style="margin-top:1.5rem">You can't beat a managed mesh at convenience. So WireSeal beats it where it counts: <em class="grad-text">you own the keys, nothing phones home, and every action is provable.</em></p>
-    </section>
+  <!-- Stats -->
+  <section class="section wrap">
+    <div class="stats-row" data-rv>
+      <div class="stat-card"><div class="stat-card__num">78</div><div class="stat-card__label">Source files audited</div></div>
+      <div class="stat-card"><div class="stat-card__num">35k+</div><div class="stat-card__label">Lines of code</div></div>
+      <div class="stat-card"><div class="stat-card__num">0</div><div class="stat-card__label">shell=True calls</div></div>
+      <div class="stat-card"><div class="stat-card__num">0</div><div class="stat-card__label">eval() calls</div></div>
+    </div>
+  </section>
 
-    <!-- Compare -->
-    <section class="section wrap" id="compare">
-        <div class="head" data-rv>
-            <span class="kicker">The difference</span>
-            <h2>Sovereign by <span class="grad-text">default.</span></h2>
+  <!-- Features -->
+  <section class="section wrap" id="features">
+    <div class="head" data-rv>
+      <div class="head__tag">Features</div>
+      <h2>Everything you need.<br><span class="grad">Nothing you don't.</span></h2>
+      <p>A complete self-hosted VPN gateway with encrypted vault, tamper-evident logging, and per-client access control. Shipped in v1.0.0.</p>
+    </div>
+    <div class="bento">
+      <div class="cell cell--wide">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Encrypted multi-admin vault</h3>
+            <p>Dual-layer AES-256-GCM + ChaCha20-Poly1305 encryption with Argon2id KDF and TOTP 2FA.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Encryption</div>
+            <h3>Vault Security</h3>
+            <p>Your keys are protected by two independent encryption layers. Even if one is compromised, the other holds.</p>
+            <ul>
+              <li>AES-256-GCM outer layer</li>
+              <li>ChaCha20-Poly1305 inner layer</li>
+              <li>Argon2id memory-hard KDF</li>
+              <li>TOTP 2FA per admin</li>
+            </ul>
+          </div>
         </div>
-        <div class="cmp" data-rv>
-            <div class="cmp__row head-row"><b>&nbsp;</b><span>WireSeal</span><span>Managed mesh VPNs</span></div>
-            <div class="cmp__row"><b>Control plane</b><span class="yes">On your box</span><span class="no">Their cloud</span></div>
-            <div class="cmp__row"><b>Account required</b><span class="yes">None</span><span class="no">Yes</span></div>
-            <div class="cmp__row"><b>Telemetry</b><span class="yes">Zero</span><span class="no">Varies</span></div>
-            <div class="cmp__row"><b>Audit log location</b><span class="yes">Your machine</span><span class="no">Their cloud</span></div>
-            <div class="cmp__row"><b>Tamper-evident log</b><span class="yes">Hash-chained</span><span class="no">—</span></div>
-            <div class="cmp__row"><b>Per-client firewall ACLs</b><span class="yes">Built in</span><span class="no">Varies</span></div>
-            <div class="cmp__row"><b>Price</b><span class="yes">Free · open source</span><span class="no">Per-seat</span></div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <h3>Tamper-evident audit</h3>
+            <p>SHA-256 hash-chained audit log. Alter an entry and WireSeal flags it.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Audit Trail</div>
+            <h3>Immutable Logs</h3>
+            <p>Every action creates a hash that links to the previous one. Breaking the chain is detectable.</p>
+            <ul>
+              <li>SHA-256 hash chain</li>
+              <li>Timestamps + actor ID</li>
+              <li>Tamper detection</li>
+              <li>Exportable for compliance</li>
+            </ul>
+          </div>
         </div>
-    </section>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+            <h3>Per-client ACLs</h3>
+            <p>Restrict each client to specific LAN resources — enforced by the host firewall.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Access Control</div>
+            <h3>Granular Permissions</h3>
+            <p>Define exactly what each peer can reach. No all-or-nothing access.</p>
+            <ul>
+              <li>IP-based restrictions</li>
+              <li>Port-level control</li>
+              <li>Protocol filtering</li>
+              <li>Firewall-enforced</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></div>
+            <h3>Access from anywhere</h3>
+            <p>SSH, SFTP, NAS, cameras — with live per-peer stats and LAN discovery.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Remote Access</div>
+            <h3>Your Network, Everywhere</h3>
+            <p>Connect from any device. Access everything on your home network securely.</p>
+            <ul>
+              <li>Phone, laptop, tablet</li>
+              <li>Live peer statistics</li>
+              <li>LAN device discovery</li>
+              <li>QR code setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></div>
+            <h3>Scheduled backups</h3>
+            <p>Encrypted vault backups to local, SSH, or WebDAV — on a schedule.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Backup</div>
+            <h3>Never Lose Your Keys</h3>
+            <p>Automated encrypted backups with multiple storage options.</p>
+            <ul>
+              <li>Local disk backup</li>
+              <li>SSH remote backup</li>
+              <li>WebDAV cloud backup</li>
+              <li>One-command restore</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--wide">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><line x1="3" y1="3" x2="21" y2="21"/></svg></div>
+            <h3>Zero telemetry. Fully yours.</h3>
+            <p>No cloud, no account, no analytics. Open source and security-audited.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Privacy</div>
+            <h3>Invisible by Design</h3>
+            <p>WireSeal doesn't phone home. No tracking, no hidden endpoints.</p>
+            <ul>
+              <li>Localhost-only API</li>
+              <li>No phone-home code</li>
+              <li>No analytics SDK</li>
+              <li>Full source available</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA -->
-    <section class="section wrap">
-        <div class="cta" data-rv>
-            <h2>Own your network<br>in ten minutes.</h2>
-            <p>One command to set up the server, one port-forward on your router, and you're running an audited, self-hosted gateway for Linux, macOS, and Windows.</p>
-            <div class="hero__cta" style="justify-content:center">
-                <a class="btn btn--primary" href="setup.html">Read the setup guide</a>
-                <a class="btn btn--ghost" href="https://github.com/prashanth-7861/WireSeal/releases" target="_blank" rel="noopener noreferrer">Download v1.0.0</a>
-            </div>
+  <!-- Deep Dive: Vault -->
+  <section class="section wrap">
+    <div class="feature-highlight" data-rv>
+      <div class="feature-highlight__content">
+        <div class="head__tag">Encryption</div>
+        <h3>Your keys. Your vault. Your rules.</h3>
+        <p>WireSeal's vault uses dual-layer encryption — AES-256-GCM on the outside, ChaCha20-Poly1305 on the inside. Your passphrase is stretched with Argon2id, the memory-hard KDF that makes brute-force attacks impractical.</p>
+        <ul>
+          <li>AES-256-GCM outer encryption layer</li>
+          <li>ChaCha20-Poly1305 inner encryption layer</li>
+          <li>Argon2id key derivation (memory-hard)</li>
+          <li>TOTP 2FA for admin access</li>
+          <li>256-bit secrets, 8 backup codes</li>
+        </ul>
+      </div>
+      <div class="feature-highlight__visual">
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
+            <span class="terminal__title">vault encryption</span>
+          </div>
+          <div class="terminal__body">
+            <div class="terminal__line"><span class="out">Layer 1: AES-256-GCM</span></div>
+            <div class="terminal__line"><span class="out">Layer 2: ChaCha20-Poly1305</span></div>
+            <div class="terminal__line"><span class="out">KDF: Argon2id (t=3, m=64MB)</span></div>
+            <div class="terminal__line"><span class="ok">✓ Vault sealed with your passphrase</span></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="lx-foot wrap">
-        <div class="lx-foot__top">
-            <div>
-                <div class="lx-foot__brand"><img src="wireseal-logo.png" alt="WireSeal"><span>WireSeal</span></div>
-                <p style="color:var(--muted);max-width:30ch;margin-top:1rem;font-size:0.92rem">The audited, zero-trust, zero-telemetry home network gateway you fully own.</p>
-            </div>
-            <div class="lx-foot__cols">
-                <div class="lx-foot__col"><h4>Product</h4><a href="#features">Features</a><a href="setup.html">Setup</a><a href="remote.html">Remote access</a><a href="modes.html">Modes</a></div>
-                <div class="lx-foot__col"><h4>Project</h4><a href="changelog.html">Changelog</a><a href="future-plans.html">Roadmap</a><a href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener noreferrer">GitHub</a><a href="privacy.html">Privacy</a></div>
-            </div>
+  <!-- Deep Dive: Audit -->
+  <section class="section wrap">
+    <div class="feature-highlight" data-rv>
+      <div class="feature-highlight__visual">
+        <div class="terminal">
+          <div class="terminal__bar">
+            <span class="terminal__dot"></span><span class="terminal__dot"></span><span class="terminal__dot"></span>
+            <span class="terminal__title">audit log</span>
+          </div>
+          <div class="terminal__body">
+            <div class="terminal__line"><span class="out">[2026-01-15 09:23:01] admin</span></div>
+            <div class="terminal__line"><span class="cmd">  add-client alice 192.168.1.2</span></div>
+            <div class="terminal__line"><span class="out">  hash: a3f2b8c1...</span></div>
+            <div class="terminal__line" style="margin-top:0.5rem"><span class="out">[2026-01-15 09:25:44] admin</span></div>
+            <div class="terminal__line"><span class="cmd">  set-acl alice 192.168.1.0/24</span></div>
+            <div class="terminal__line"><span class="out">  hash: b7d4e9f2...</span></div>
+            <div class="terminal__line" style="margin-top:0.5rem"><span class="ok">✓ Chain integrity: verified</span></div>
+          </div>
         </div>
-        <div class="lx-foot__bottom">
-            <span>© 2026 Prashanth Mudigonda · MIT licensed</span>
-            <span>Open source · forever free</span>
-        </div>
-    </footer>
+      </div>
+      <div class="feature-highlight__content">
+        <div class="head__tag">Audit Trail</div>
+        <h3>Every action. Hash-chained. Tamper-proof.</h3>
+        <p>WireSeal logs every privileged action to a local audit file. Each entry includes a SHA-256 hash of the previous entry, creating a blockchain-like chain. Modify any record and the chain breaks — WireSeal detects it instantly.</p>
+        <ul>
+          <li>SHA-256 hash chain for integrity</li>
+          <li>Timestamps, actor identity, action details</li>
+          <li>Tamper detection on every read</li>
+          <li>Exportable for compliance</li>
+          <li>Stored locally — never leaves your machine</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <script src="luxe.js" defer></script>
+  <!-- How It Works -->
+  <section class="section wrap" id="how">
+    <div class="head head--center" data-rv>
+      <div class="head__tag">How it works</div>
+      <h2>Up and running in <span class="grad">ten minutes.</span></h2>
+      <p>One command to set up the server, one port-forward on your router, and you're running an audited, self-hosted gateway.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-rv>
+        <div class="step__num">1</div>
+        <h3>Initialize</h3>
+        <p>Run <code>wireseal init</code> — generates server keys, creates vault, configures firewall, starts WireGuard. One command does it all.</p>
+      </div>
+      <div class="step" data-rv data-rv-d="1">
+        <div class="step__num">2</div>
+        <h3>Add clients</h3>
+        <p>Run <code>wireseal add-client alice</code> — generates client keys, stores in vault, outputs QR code. Scan with your phone. Done.</p>
+      </div>
+      <div class="step" data-rv data-rv-d="2">
+        <div class="step__num">3</div>
+        <h3>Connect</h3>
+        <p>Open the WireGuard app, scan the QR code, and you're on your home network from anywhere. Access SSH, NAS, cameras, everything.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="section wrap" id="security">
+    <div class="head" data-rv>
+      <div class="head__tag">Security</div>
+      <h2>Security is not a feature.<br><span class="grad">It's the foundation.</span></h2>
+      <p>WireSeal is security infrastructure. Full source-level audit performed for v1.0.0. Findings and remediation published.</p>
+    </div>
+    <div class="bento">
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Local-only control plane</h3>
+            <p>Management API binds to 127.0.0.1 only. Never exposed to the network.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Network</div>
+            <h3>Invisible to the Internet</h3>
+            <p>No remote admin without SSH. Your server can't be attacked if it can't be seen.</p>
+            <ul>
+              <li>127.0.0.1 binding only</li>
+              <li>No port exposure</li>
+              <li>SSH-only remote access</li>
+              <li>Firewall-enforced</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+            <h3>Dual-layer encryption</h3>
+            <p>AES-256-GCM + ChaCha20-Poly1305 with Argon2id KDF.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Crypto</div>
+            <h3>Defense in Depth</h3>
+            <p>Two independent encryption layers. If one breaks, the other holds.</p>
+            <ul>
+              <li>AES-256-GCM outer</li>
+              <li>ChaCha20-Poly1305 inner</li>
+              <li>Argon2id 64MB memory</li>
+              <li>Quantum-resistant design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <h3>Hash-chained audit</h3>
+            <p>SHA-256 chain on every privileged action. Tamper-proof logging.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Integrity</div>
+            <h3>Blockchain-like Audit</h3>
+            <p>Each log entry hashes the previous one. Breaking the chain is detectable.</p>
+            <ul>
+              <li>SHA-256 hash chain</li>
+              <li>Instant tamper detection</li>
+              <li>Exportable for compliance</li>
+              <li>Local storage only</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <h3>TOTP 2FA</h3>
+            <p>RFC 6238 compliant. 256-bit secrets. 8 backup codes.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Authentication</div>
+            <h3>Two-Factor Security</h3>
+            <p>Standard TOTP with backup codes. Rate-limited to prevent brute force.</p>
+            <ul>
+              <li>RFC 6238 compliant</li>
+              <li>256-bit secrets</li>
+              <li>8 backup codes</li>
+              <li>Anti-replay protection</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell cell--wide">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+            <h3>Security audit — v1.0.0</h3>
+            <p>Independent full-knowledge deep dive. 78 files, 35k+ lines reviewed.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Audit</div>
+            <h3>Verified by Experts</h3>
+            <p>Full source-level review. Every finding remediated and published.</p>
+            <ul>
+              <li>78 source files reviewed</li>
+              <li>35,000+ lines of code</li>
+              <li>Zero shell=True calls</li>
+              <li>Published in SECURITY_AUDIT_v1.0.0.md</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why WireSeal -->
+  <section class="section wrap">
+    <div class="head" data-rv>
+      <div class="head__tag">Why WireSeal</div>
+      <h2>Built for people who<br><span class="grad">care about privacy.</span></h2>
+      <p>If you're running your own DNS, self-hosting services, or care about data sovereignty — WireSeal is your VPN gateway.</p>
+    </div>
+    <div class="bento">
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div>
+            <h3>Self-hosted</h3>
+            <p>Runs on your hardware. No third-party servers.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Infrastructure</div>
+            <h3>Your Hardware</h3>
+            <p>Complete control over your network infrastructure.</p>
+            <ul>
+              <li>Your server, your rules</li>
+              <li>No vendor lock-in</li>
+              <li>Full data sovereignty</li>
+              <li>Customizable setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Zero trust</h3>
+            <p>Every action requires authentication. Every access is logged.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Security Model</div>
+            <h3>Verify Everything</h3>
+            <p>No implicit trust. Cryptographic verification at every step.</p>
+            <ul>
+              <li>Auth required for all actions</li>
+              <li>All access logged</li>
+              <li>Keys always encrypted</li>
+              <li>Full audit trail</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+            <h3>Zero telemetry</h3>
+            <p>No phone-home. No analytics. No usage tracking.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Privacy</div>
+            <h3>Invisible by Design</h3>
+            <p>WireSeal doesn't know you exist. And that's by design.</p>
+            <ul>
+              <li>No phone-home code</li>
+              <li>No analytics SDK</li>
+              <li>No hidden endpoints</li>
+              <li>Verify with network tools</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
+            <h3>Audited code</h3>
+            <p>Full source code available. Independent security audit.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Transparency</div>
+            <h3>Verify Yourself</h3>
+            <p>Read the code. Read the audit. Trust no one.</p>
+            <ul>
+              <li>MIT licensed</li>
+              <li>Full source on GitHub</li>
+              <li>Independent audit report</li>
+              <li>All findings remediated</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></div>
+            <h3>Cross-platform</h3>
+            <p>Server on Linux. Clients on everything.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">Compatibility</div>
+            <h3>Works Everywhere</h3>
+            <p>Any WireGuard client connects. No vendor lock-in.</p>
+            <ul>
+              <li>Linux server</li>
+              <li>macOS / Windows clients</li>
+              <li>iOS / Android apps</li>
+              <li>Standard WireGuard protocol</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cell__inner">
+          <div class="cell__front">
+            <div class="cell__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+            <h3>Free forever</h3>
+            <p>MIT licensed. No premium tier. No seat limits.</p>
+            <div class="cell__hint">Hover to learn more →</div>
+          </div>
+          <div class="cell__back">
+            <div class="cell__back-tag">License</div>
+            <h3>Open Source</h3>
+            <p>Use it for anything. No restrictions. No catches.</p>
+            <ul>
+              <li>MIT license</li>
+              <li>No enterprise pricing</li>
+              <li>No device limits</li>
+              <li>Community supported</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compare -->
+  <section class="section wrap" id="compare">
+    <div class="head" data-rv>
+      <div class="head__tag">Comparison</div>
+      <h2>Sovereign by <span class="grad">default.</span></h2>
+      <p>See how WireSeal compares to managed mesh VPN services that route your traffic through their infrastructure.</p>
+    </div>
+    <div class="cmp" data-rv>
+      <div class="cmp__row cmp__row--head"><b></b><span>WireSeal</span><span>Managed mesh VPNs</span></div>
+      <div class="cmp__row"><b>Control plane</b><span class="yes">On your box</span><span class="no">Their cloud</span></div>
+      <div class="cmp__row"><b>Account required</b><span class="yes">None</span><span class="no">Yes</span></div>
+      <div class="cmp__row"><b>Telemetry</b><span class="yes">Zero</span><span class="no">Varies</span></div>
+      <div class="cmp__row"><b>Audit log</b><span class="yes">Hash-chained, local</span><span class="no">Their cloud</span></div>
+      <div class="cmp__row"><b>Per-client ACLs</b><span class="yes">Firewall-enforced</span><span class="no">Varies</span></div>
+      <div class="cmp__row"><b>Encryption at rest</b><span class="yes">Dual-layer AES+ChaCha</span><span class="no">Varies</span></div>
+      <div class="cmp__row"><b>2FA</b><span class="yes">TOTP with backup codes</span><span class="no">Varies</span></div>
+      <div class="cmp__row"><b>Backups</b><span class="yes">Local, SSH, WebDAV</span><span class="no">Their cloud</span></div>
+      <div class="cmp__row"><b>Price</b><span class="yes">Free · open source</span><span class="no">$5-10/device/mo</span></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section wrap" id="cta">
+    <div class="cta" data-rv>
+      <h2>Your network. Your rules.</h2>
+      <p>One command to set up. One port-forward on your router. Audited, self-hosted, zero-telemetry VPN for Linux, macOS, and Windows.</p>
+      <div class="cta__btns">
+        <a class="btn btn--primary" href="setup.html">Read the setup guide</a>
+        <a class="btn btn--ghost" href="https://github.com/prashanth-7861/WireSeal/releases" target="_blank" rel="noopener">Download v1.0.0</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand"><img src="wireseal-logo.png" alt="WireSeal">WireSeal</div>
+        <p>The audited, zero-trust, zero-telemetry home network gateway you fully own.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col"><h4>Product</h4><a href="#features">Features</a><a href="setup.html">Setup</a><a href="remote.html">Remote access</a><a href="modes.html">Modes</a></div>
+        <div class="footer__col"><h4>Project</h4><a href="changelog.html">Changelog</a><a href="future-plans.html">Roadmap</a><a href="https://github.com/prashanth-7861/WireSeal" target="_blank" rel="noopener">GitHub</a><a href="privacy.html">Privacy</a></div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 Prashanth Mudigonda · MIT licensed</span>
+      <span>Open source · forever free</span>
+    </div>
+  </footer>
+
+  <script src="luxe.js" defer></script>
 </body>
 </html>

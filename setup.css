@@ -105,18 +105,19 @@
 }
 
 .req-section {
-    background: var(--bg-light);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin-bottom: 32px;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
 }
 
 .req-section h3 {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
 }
 
 .req-section ul {
@@ -126,11 +127,12 @@
 }
 
 .req-section li {
-    padding: 6px 0;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    padding-left: 20px;
+    padding: 0.4rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding-left: 1.25rem;
     position: relative;
+    line-height: 1.5;
 }
 
 .req-section li::before {
@@ -138,6 +140,7 @@
     position: absolute;
     left: 0;
     color: var(--accent);
+    font-weight: 700;
 }
 
 .method-tabs {
@@ -224,8 +227,13 @@
 .step-note,
 .step-warning {
     font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 8px;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+    line-height: 1.5;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 6px 6px 0;
 }
 
 .step-warning {
@@ -238,7 +246,7 @@
 }
 
 .code-block {
-    background: var(--bg-dark);
+    background: #1a1a2e;
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 16px 20px;
@@ -248,6 +256,7 @@
 .code-block pre {
     margin: 0;
     padding: 0;
+    background: transparent;
 }
 
 .code-block code {
@@ -295,14 +304,14 @@
 }
 
 .download-btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--text);
+    background: var(--gradient-primary);
+    border-color: transparent;
+    color: #fff;
 }
 
 .download-btn.primary:hover {
-    background: var(--accent-dim);
-    border-color: var(--accent-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(94,67,217,0.3);
 }
 
 .download-btn svg {
@@ -310,12 +319,13 @@
 }
 
 .init-section {
-    background: var(--bg-light);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    margin-top: 32px;
-    margin-bottom: 32px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-card);
 }
 
 .next-steps {
@@ -338,23 +348,25 @@
 }
 
 .next-card {
-    background: var(--bg-light);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
 }
 
 .next-card h4 {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
 }
 
 .next-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-top: 0.5rem;
 }
 
 .help-section {
@@ -377,22 +389,24 @@
 }
 
 .help-card {
-    background: var(--bg-light);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-card);
 }
 
 .help-card h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
 }
 
 .help-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 .help-card code {
@@ -439,7 +453,7 @@
 .copy-btn.copied svg {
     display: block;
 }
-}
+@media (max-width: 700px) {
     .setup-container h1 {
         font-size: 2rem;
     }
@@ -467,23 +481,26 @@
 }
 
 .info-box {
-    background: var(--bg-light);
+    background: var(--bg-1);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin: 16px 0;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-card);
+    border-left: 3px solid var(--accent);
 }
 
 .info-box h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
     color: var(--text);
-    margin-bottom: 8px;
+    margin-bottom: 0.75rem;
 }
 
 .info-box p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 .next-section {

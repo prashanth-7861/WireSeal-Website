@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,14 +25,14 @@
 </head>
 <body>
     <script>
-        // Prevent dark mode flash
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            }
-        })();
+      (function() {
+        var saved = localStorage.getItem('ws-theme');
+        if (saved) {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
     </script>
     <!-- Navigation -->
     <nav class="navbar">
@@ -50,7 +50,7 @@
                 <a href="changelog.html" class="nav-link">Changelog</a>
             </div>
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
                 </button>
@@ -236,7 +236,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal add-client alice</code></pre>
                         </div>
-                        <p class="step-note">Generate QR code for mobile</p>
+                        <p class="step-note">Adds a new client named <code>alice</code> and generates a QR code. Scan the QR with the WireSeal mobile app to connect instantly.</p>
                     </div>
                     
                     <div class="step-section">
@@ -244,6 +244,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal list-clients</code></pre>
                         </div>
+                        <p class="step-note">Show all registered clients with their public keys, IP assignments, and connection status. Useful for auditing who has access.</p>
                     </div>
                     
                     <div class="step-section">
@@ -251,7 +252,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal show-qr alice</code></pre>
                         </div>
-                        <p class="step-note">Display QR code in terminal</p>
+                        <p class="step-note">Re-display the QR code for an existing client. Useful if the original QR was lost before the mobile app scanned it.</p>
                     </div>
                     
                     <div class="step-section">
@@ -259,6 +260,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal export alice --output /tmp/alice.conf</code></pre>
                         </div>
+                        <p class="step-note">Save the client's WireGuard configuration to a file. Share this with the client for manual setup if QR scanning isn't available.</p>
                     </div>
                     
                     <div class="step-section">
@@ -266,6 +268,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal remove-client alice</code></pre>
                         </div>
+                        <p class="step-note">Revoke a client's access immediately. The client's key is removed from the server — they will lose connectivity on their next handshake.</p>
                     </div>
                     
                     <div class="step-section">
@@ -273,7 +276,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal status</code></pre>
                         </div>
-                        <p class="step-note">Show connected peers and transfer stats</p>
+                        <p class="step-note">Display live connection status: connected peers, transfer statistics (bytes sent/received), and tunnel uptime for each client.</p>
                     </div>
                     
                     <div class="step-section">
@@ -281,6 +284,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal rotate-keys alice</code></pre>
                         </div>
+                        <p class="step-note">Generate a new key pair for a client and invalidate the old one. The client will need to re-authenticate with the updated configuration.</p>
                     </div>
                     
                     <div class="step-section">
@@ -288,6 +292,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal rotate-server-keys</code></pre>
                         </div>
+                        <p class="step-note">Regenerate the server's private key and redistribute updated configs to all clients. All clients must reconnect after this operation.</p>
                     </div>
                     
                     <div class="step-section">
@@ -295,6 +300,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal update-dns</code></pre>
                         </div>
+                        <p class="step-note">Update the dynamic DNS record with your current public IP. Run this periodically or set up a cron job if your ISP assigns dynamic IPs.</p>
                     </div>
                     
                     <div class="step-section">
@@ -302,6 +308,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal backup-vault /path/to/backup</code></pre>
                         </div>
+                        <p class="step-note">Create an encrypted backup of your entire WireSeal vault — all keys, client configs, and settings. Store the backup in a safe, offline location.</p>
                     </div>
                     
                     <div class="step-section">
@@ -309,6 +316,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal lock</code></pre>
                         </div>
+                        <p class="step-note">Lock the vault and stop all VPN traffic. The server remains running but no data passes through until the vault is unlocked with your passphrase.</p>
                     </div>
                     
                     <div class="step-section">
@@ -316,6 +324,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal change-passphrase</code></pre>
                         </div>
+                        <p class="step-note">Update your vault passphrase. You will be prompted for the current passphrase first, then asked to enter and confirm the new one.</p>
                     </div>
                     
                     <div class="step-section">
@@ -323,6 +332,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal audit-log</code></pre>
                         </div>
+                        <p class="step-note">Display the server's audit trail: client connections, disconnections, key rotations, config changes, and admin actions with timestamps.</p>
                     </div>
                     
                     <div class="step-section">
@@ -330,7 +340,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal terminate</code></pre>
                         </div>
-                        <p class="step-note">Bring down WireGuard interface</p>
+                        <p class="step-note">Gracefully bring down the WireGuard tunnel, remove the network interface, and disconnect all clients. The vault and configuration are preserved.</p>
                     </div>
                     
                     <div class="step-section">
@@ -338,7 +348,7 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="code-block">
                             <pre><code>sudo wireseal fresh-start</code></pre>
                         </div>
-                        <p class="step-note">Wipe all data and re-initialize</p>
+                        <p class="step-note">Wipe all WireSeal data — vault, keys, client configs, and logs — then re-initialize from scratch. Use this only if you want a completely clean setup.</p>
                     </div>
                     
                     <!-- Troubleshooting -->
@@ -347,19 +357,23 @@ sudo ./wireseal-linux.sh</code></pre>
                         <div class="help-grid">
                             <div class="help-card">
                                 <h4>Permission denied</h4>
-                                <p>Use <code>sudo</code> before commands.</p>
+                                <p>WireSeal requires root privileges to create network interfaces, modify firewall rules, and manage the VPN tunnel. If you see <code>Permission denied</code>, prefix your command with <code>sudo</code>.</p>
+                                <p>For convenience, run <code>sudo -i</code> once to open a root shell, then execute commands without re-typing <code>sudo</code> each time.</p>
                             </div>
                             <div class="help-card">
                                 <h4>WireGuard not found</h4>
-                                <p>Install: <code>sudo apt install wireguard-tools</code></p>
+                                <p>WireSeal depends on the <code>wireguard-tools</code> package for kernel interface management. Most distributions ship it in their default repos.</p>
+                                <p>Install it with: <code>sudo apt install wireguard-tools</code> (Debian/Ubuntu), <code>sudo dnf install wireguard-tools</code> (Fedora), or <code>sudo pacman -S wireguard-tools</code> (Arch).</p>
                             </div>
                             <div class="help-card">
                                 <h4>Port in use</h4>
-                                <p>Use: <code>sudo wireseal init --port 51821</code></p>
+                                <p>Another service may already be using UDP port 51820. You can specify a different port during initialization.</p>
+                                <p>Use: <code>sudo wireseal init --port 51821</code> to pick an alternative port, then update your router's port-forward rule to match.</p>
                             </div>
                             <div class="help-card">
                                 <h4>Firewall blocked</h4>
-                                <p>WireSeal configures firewall automatically.</p>
+                                <p>WireSeal automatically configures <code>ufw</code> (Ubuntu/Debian) or <code>firewalld</code> (Fedora/RHEL) to allow WireGuard traffic on the configured port during <code>init</code>.</p>
+                                <p>If you're using a custom firewall, ensure UDP traffic is allowed on your WireGuard port. No manual <code>iptables</code> rules are needed in most cases.</p>
                             </div>
                         </div>
                     </div>
@@ -488,6 +502,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
                         </div>
+                        <p class="step-note">Creates vault, generates keys, configures the firewall and NAT for your VPN subnet.</p>
                     </div>
 
                     <div class="step-section">
@@ -506,6 +521,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal serve</code></pre>
                         </div>
+                        <p class="step-note">Launch the web-based admin dashboard at http://localhost:8080. Manage clients, view logs, and configure server settings from your browser.</p>
                     </div>
                     
                     <div class="step-section">
@@ -513,6 +529,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal add-client alice</code></pre>
                         </div>
+                        <p class="step-note">Register a new device and generate its QR code. Scan with the WireSeal mobile app for instant configuration.</p>
                     </div>
                     
                     <div class="step-section">
@@ -520,6 +537,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal list-clients</code></pre>
                         </div>
+                        <p class="step-note">View all registered clients, their assigned IPs, public keys, and online/offline status.</p>
                     </div>
                     
                     <div class="step-section">
@@ -527,6 +545,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal show-qr alice</code></pre>
                         </div>
+                        <p class="step-note">Re-display a client's QR code if it was lost before being scanned by the mobile app.</p>
                     </div>
                     
                     <div class="step-section">
@@ -534,6 +553,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal export alice --output /tmp/alice.conf</code></pre>
                         </div>
+                        <p class="step-note">Export a client's WireGuard configuration file for manual setup on non-mobile devices.</p>
                     </div>
                     
                     <div class="step-section">
@@ -541,6 +561,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal remove-client alice</code></pre>
                         </div>
+                        <p class="step-note">Revoke access for a client. Their key is immediately invalidated and the tunnel is torn down on next handshake.</p>
                     </div>
                     
                     <div class="step-section">
@@ -548,6 +569,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal status</code></pre>
                         </div>
+                        <p class="step-note">Display live connection info: connected peers, data transferred, and tunnel uptime for each active client.</p>
                     </div>
                     
                     <div class="step-section">
@@ -555,6 +577,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal rotate-keys alice</code></pre>
                         </div>
+                        <p class="step-note">Generate a fresh key pair for a client. The old key is revoked — the client must update their configuration to reconnect.</p>
                     </div>
                     
                     <div class="step-section">
@@ -562,6 +585,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal rotate-server-keys</code></pre>
                         </div>
+                        <p class="step-note">Regenerate the server key pair. All clients will need updated configurations to reconnect after this operation.</p>
                     </div>
                     
                     <div class="step-section">
@@ -569,6 +593,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal update-dns</code></pre>
                         </div>
+                        <p class="step-note">Sync your current public IP to DuckDNS. Set up a cron job if your ISP assigns dynamic IP addresses.</p>
                     </div>
                     
                     <div class="step-section">
@@ -576,6 +601,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal backup-vault /path/to/backup</code></pre>
                         </div>
+                        <p class="step-note">Create an encrypted backup of your vault — all keys, configs, and client data. Keep the backup in a secure offline location.</p>
                     </div>
                     
                     <div class="step-section">
@@ -583,6 +609,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal lock</code></pre>
                         </div>
+                        <p class="step-note">Lock the encrypted vault. All VPN traffic is halted until the vault is unlocked with your passphrase.</p>
                     </div>
                     
                     <div class="step-section">
@@ -590,6 +617,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal change-passphrase</code></pre>
                         </div>
+                        <p class="step-note">Update your vault passphrase. You will be prompted for the current passphrase, then asked to enter and confirm the new one.</p>
                     </div>
                     
                     <div class="step-section">
@@ -597,6 +625,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal audit-log</code></pre>
                         </div>
+                        <p class="step-note">Review the server audit trail: connection events, key rotations, configuration changes, and admin actions with timestamps.</p>
                     </div>
                     
                     <div class="step-section">
@@ -604,6 +633,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal terminate</code></pre>
                         </div>
+                        <p class="step-note">Gracefully stop the WireGuard tunnel and disconnect all clients. Vault data and configurations are preserved.</p>
                     </div>
                     
                     <div class="step-section">
@@ -611,6 +641,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>sudo wireseal fresh-start</code></pre>
                         </div>
+                        <p class="step-note">Delete all WireSeal data and re-initialize from scratch. Use this only if you want a completely clean setup with no existing configuration.</p>
                     </div>
                     
                     <!-- Troubleshooting -->
@@ -619,19 +650,23 @@ chmod +x wireseal-macos.sh
                         <div class="help-grid">
                             <div class="help-card">
                                 <h4>Permission denied</h4>
-                                <p>Use <code>sudo</code> before commands.</p>
+                                <p>WireSeal requires root privileges to create network interfaces and manage the VPN tunnel. Prefix commands with <code>sudo</code>.</p>
+                                <p>You can also run <code>sudo -i</code> to open a persistent root shell and avoid re-typing <code>sudo</code> for each command.</p>
                             </div>
                             <div class="help-card">
                                 <h4>WireGuard not found</h4>
-                                <p>Install: <code>sudo apt install wireguard-tools</code></p>
+                                <p>WireSeal depends on WireGuard kernel support. macOS includes it natively from Monterey onward, but the <code>wireguard-tools</code> CLI may need installing via Homebrew.</p>
+                                <p>Run: <code>brew install wireguard-tools</code> to install the userspace tools if they are missing.</p>
                             </div>
                             <div class="help-card">
                                 <h4>Port in use</h4>
-                                <p>Use: <code>sudo wireseal init --port 51821</code></p>
+                                <p>Another service may already be using UDP port 51820. Specify a different port during initialization.</p>
+                                <p>Use: <code>sudo wireseal init --port 51821</code> and update your router's port-forward rule to match the new port.</p>
                             </div>
                             <div class="help-card">
                                 <h4>Firewall blocked</h4>
-                                <p>WireSeal configures firewall automatically.</p>
+                                <p>WireSeal automatically configures <code>pf.conf</code> on macOS to allow WireGuard traffic on the configured port.</p>
+                                <p>If you're using a third-party firewall, ensure UDP traffic is permitted on your WireGuard port. No manual <code>pfctl</code> configuration is needed.</p>
                             </div>
                         </div>
                     </div>
@@ -749,6 +784,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal init --subnet 10.0.0.1/24 --port 51820</code></pre>
                         </div>
+                        <p class="step-note">Creates vault, generates keys, and configures Windows Firewall for your VPN subnet.</p>
                     </div>
 
                     <div class="step-section">
@@ -767,6 +803,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal serve</code></pre>
                         </div>
+                        <p class="step-note">Launch the web-based admin dashboard at http://localhost:8080. Manage clients, view logs, and configure settings from your browser.</p>
                     </div>
                     
                     <div class="step-section">
@@ -774,6 +811,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal add-client alice</code></pre>
                         </div>
+                        <p class="step-note">Register a new device and generate its QR code. Scan with the WireSeal mobile app for instant configuration.</p>
                     </div>
                     
                     <div class="step-section">
@@ -781,6 +819,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal list-clients</code></pre>
                         </div>
+                        <p class="step-note">View all registered clients with their assigned IPs, public keys, and connection status.</p>
                     </div>
                     
                     <div class="step-section">
@@ -788,6 +827,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal show-qr alice</code></pre>
                         </div>
+                        <p class="step-note">Re-display a client's QR code if it needs to be re-scanned by the mobile app.</p>
                     </div>
                     
                     <div class="step-section">
@@ -795,6 +835,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal export alice --output C:\temp\alice.conf</code></pre>
                         </div>
+                        <p class="step-note">Export a client's WireGuard configuration file for manual setup on non-mobile devices.</p>
                     </div>
                     
                     <div class="step-section">
@@ -802,6 +843,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal remove-client alice</code></pre>
                         </div>
+                        <p class="step-note">Revoke access for a client. Their key is immediately invalidated and the tunnel is disconnected.</p>
                     </div>
                     
                     <div class="step-section">
@@ -809,6 +851,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal status</code></pre>
                         </div>
+                        <p class="step-note">Display live connection info: connected peers, data transferred, and tunnel uptime for each active client.</p>
                     </div>
                     
                     <div class="step-section">
@@ -816,6 +859,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal rotate-keys alice</code></pre>
                         </div>
+                        <p class="step-note">Generate a fresh key pair for a client and revoke the old one. The client must update their config to reconnect.</p>
                     </div>
                     
                     <div class="step-section">
@@ -823,6 +867,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal rotate-server-keys</code></pre>
                         </div>
+                        <p class="step-note">Regenerate the server key pair. All clients will need updated configurations to reconnect.</p>
                     </div>
                     
                     <div class="step-section">
@@ -830,6 +875,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal update-dns</code></pre>
                         </div>
+                        <p class="step-note">Sync your current public IP to DuckDNS. Schedule this task if your ISP assigns dynamic IPs.</p>
                     </div>
                     
                     <div class="step-section">
@@ -837,6 +883,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal backup-vault C:\path\to\backup</code></pre>
                         </div>
+                        <p class="step-note">Create an encrypted backup of your vault — all keys, configs, and client data stored in a secure location.</p>
                     </div>
                     
                     <div class="step-section">
@@ -844,6 +891,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal lock</code></pre>
                         </div>
+                        <p class="step-note">Lock the encrypted vault. All VPN traffic stops until the vault is unlocked with your passphrase.</p>
                     </div>
                     
                     <div class="step-section">
@@ -851,6 +899,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal change-passphrase</code></pre>
                         </div>
+                        <p class="step-note">Update your vault passphrase. You'll be prompted for the current passphrase before setting a new one.</p>
                     </div>
                     
                     <div class="step-section">
@@ -858,6 +907,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal audit-log</code></pre>
                         </div>
+                        <p class="step-note">Review the server audit trail: connection events, key rotations, config changes, and admin actions.</p>
                     </div>
                     
                     <div class="step-section">
@@ -865,6 +915,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal terminate</code></pre>
                         </div>
+                        <p class="step-note">Gracefully stop the WireGuard tunnel and disconnect all clients. Vault data is preserved.</p>
                     </div>
                     
                     <div class="step-section">
@@ -872,6 +923,7 @@ chmod +x wireseal-macos.sh
                         <div class="code-block">
                             <pre><code>wireseal fresh-start</code></pre>
                         </div>
+                        <p class="step-note">Delete all WireSeal data and re-initialize from scratch. Only use this if you want a completely clean setup.</p>
                     </div>
                     
                     <!-- Troubleshooting -->
@@ -880,19 +932,23 @@ chmod +x wireseal-macos.sh
                         <div class="help-grid">
                             <div class="help-card">
                                 <h4>Permission denied</h4>
-                                <p>Run as Administrator.</p>
+                                <p>WireSeal requires Administrator privileges to create network adapters and configure firewall rules. Right-click your terminal (PowerShell or CMD) and select <strong>Run as Administrator</strong>.</p>
+                                <p>Commands that modify system network settings will fail silently without elevated privileges.</p>
                             </div>
                             <div class="help-card">
                                 <h4>WireGuard not found</h4>
-                                <p>Install WireGuard for Windows.</p>
+                                <p>WireSeal uses the official WireGuard for Windows kernel driver. The install script downloads and installs it automatically if missing.</p>
+                                <p>For manual install, download from <a href="https://www.wireguard.com/install/" target="_blank" rel="noopener noreferrer">wireguard.com/install</a> — the tunnel adapter is required for VPN operation.</p>
                             </div>
                             <div class="help-card">
                                 <h4>Port in use</h4>
-                                <p>Use: <code>wireseal init --port 51821</code></p>
+                                <p>Another application may already be listening on UDP port 51820. You can change the port during initialization.</p>
+                                <p>Run: <code>wireseal init --port 51821</code> to use an alternative port, then update your router's port-forward rule accordingly.</p>
                             </div>
                             <div class="help-card">
                                 <h4>Firewall blocked</h4>
-                                <p>WireSeal configures Windows Firewall.</p>
+                                <p>WireSeal automatically creates a Windows Firewall rule to allow inbound UDP traffic on the configured WireGuard port during initialization.</p>
+                                <p>If you're using a third-party firewall suite, verify that UDP traffic is permitted on your WireGuard port. Check Windows Defender Firewall with Advanced Security for any blocked connections.</p>
                             </div>
                         </div>
                     </div>
@@ -927,45 +983,20 @@ chmod +x wireseal-macos.sh
             document.querySelector('.nav-toggle').addEventListener('click', () => {
                 document.querySelector('.nav-menu').classList.toggle('active');
             });
-            
-            // Theme toggle
-            const themeToggle = document.querySelector('.theme-toggle');
-            const htmlElement = document.documentElement;
-            
-            // Check for saved theme preference or use system preference
-            const savedTheme = localStorage.getItem('theme');
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-                htmlElement.setAttribute('data-theme', 'dark');
-                updateThemeIcon(true);
-            }
-            
-            themeToggle.addEventListener('click', () => {
-                const isDark = htmlElement.getAttribute('data-theme') === 'dark';
-                if (isDark) {
-                    htmlElement.removeAttribute('data-theme');
-                    localStorage.setItem('theme', 'light');
-                    updateThemeIcon(false);
-                } else {
-                    htmlElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('theme', 'dark');
-                    updateThemeIcon(true);
-                }
-            });
-            
-            function updateThemeIcon(isDark) {
-                const sunIcon = themeToggle.querySelector('.icon-sun');
-                const moonIcon = themeToggle.querySelector('.icon-moon');
-                if (isDark) {
-                    sunIcon.style.display = 'none';
-                    moonIcon.style.display = 'block';
-                } else {
-                    sunIcon.style.display = 'block';
-                    moonIcon.style.display = 'none';
-                }
-            }
         });
+    </script>
+    <script>
+      (function() {
+        var toggle = document.getElementById('themeToggle');
+        if (toggle) {
+          toggle.addEventListener('click', function() {
+            var current = document.documentElement.getAttribute('data-theme');
+            var next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('ws-theme', next);
+          });
+        }
+      })();
     </script>
     <script src="premium.js" defer></script>
 </body>
